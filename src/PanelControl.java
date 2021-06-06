@@ -28,7 +28,7 @@ public class PanelControl extends JPanel {
         this.add(algorithm,gbc);
 
         reset.addActionListener(e -> {
-            MainView.setBoardgui(new BoardGUI());
+            MainView.resetBoard();
         });
 
         start.addActionListener(e -> {

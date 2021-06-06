@@ -1,87 +1,52 @@
+
 import java.util.ArrayList;
 
 public class A_Stern {
 
-    private boolean solving = true;
+    private Node node;
+    private ArrayList<Node> openlist;
+    private ArrayList<Node> closedList;
+    private ArrayList<Node> sortList;
+    private boolean search;
+    private Node end;
 
-    public void AStar() {
-            ArrayList<Node> priority = new ArrayList<Node>();
-            priority.add(map[startx][starty]);
-            while(solving) {
-                if(priority.size() <= 0) {
-                    solving = false;
-                    break;
-                }
-                int hops = priority.get(0).getHops()+1;
-                ArrayList<Node> explored = exploreNeighbors(priority.get(0),hops);
-                if(explored.size() > 0) {
-                    priority.remove(0);
-                    priority.addAll(explored);
-                    Update();                   //
-                    delay();
-                } else {
-                    priority.remove(0);
-                }
-                sortQue(priority);	//SORT THE PRIORITY QUE
-            }
-        }
+    public A_Stern(){
+        openlist = new ArrayList<>();
+        closedList = new ArrayList<>();
+        end = BoardGUI.getBoard()[BoardGUI.getFinishx()][BoardGUI.getFinishy()];
+    }
 
-        public ArrayList<Node> sortQue(ArrayList<Node> sort) {	//SORT PRIORITY QUE
-            int c = 0;
-            while(c < sort.size()) {
-                int sm = c;
-                for(int i = c+1; i < sort.size(); i++) {
-                    if(sort.get(i).getEuclidDist()+sort.get(i).getHops() < sort.get(sm).getEuclidDist()+sort.get(sm).getHops())
-                        sm = i;
-                }
-                if(c != sm) {
-                    Node temp = sort.get(c);
-                    sort.set(c, sort.get(sm));
-                    sort.set(sm, temp);
-                }
-                c++;
-            }
-            return sort;
-        }
+    private void searchPath(){
+        openlist.add(BoardGUI.getBoard()[BoardGUI.getStartx()][BoardGUI.getStarty()]);
+        search = true;
+        Node currentNode;
 
-        public ArrayList<Node> exploreNeighbors(Node current, int hops) {	//EXPLORE NEIGHBORS
-            ArrayList<Node> explored = new ArrayList<Node>();	//LIST OF NODES THAT HAVE BEEN EXPLORED
-            for(int a = -1; a <= 1; a++) {
-                for(int b = -1; b <= 1; b++) {
-                    int xbound = current.getX()+a;
-                    int ybound = current.getY()+b;
-                    if((xbound > -1 && xbound < cells) && (ybound > -1 && ybound < cells)) {	//MAKES SURE THE NODE IS NOT OUTSIDE THE GRID
-                        Node neighbor = map[xbound][ybound];
-                        if((neighbor.getHops()==-1 || neighbor.getHops() > hops) && neighbor.getType()!=2) {	//CHECKS IF THE NODE IS NOT A WALL AND THAT IT HAS NOT BEEN EXPLORED
-                            explore(neighbor, current.getX(), current.getY(), hops);	//EXPLORE THE NODE
-                            explored.add(neighbor);	//ADD THE NODE TO THE LIST
-                        }
-                    }
-                }
+        do {
+            if(openlist.size() <= 0){
+                search = false;
+                break;
             }
-            return explored;
-        }
+            currentNode = openlist.get(0);
+            openlist.remove(0);
+            if(currentNode == end){
+                closedList.add(currentNode);
+            }
+            closedList.add(currentNode);
 
-        public void explore(Node current, int lastx, int lasty, int hops) {	//EXPLORE A NODE
-            if(current.getType()!=0 && current.getType() != 1)	//CHECK THAT THE NODE IS NOT THE START OR FINISH
-                current.setType(4);	//SET IT TO EXPLORED
-            current.setLastNode(lastx, lasty);	//KEEP TRACK OF THE NODE THAT THIS NODE IS EXPLORED FROM
-            current.setHops(hops);	//SET THE HOPS FROM THE START
-            checks++;
-            if(current.getType() == 1) {	//IF THE NODE IS THE FINISH THEN BACKTRACK TO GET THE PATH
-                backtrack(current.getLastX(), current.getLastY(),hops);
-            }
-        }
+            expandNode(currentNode);
 
-        public void backtrack(int lx, int ly, int hops) {	//BACKTRACK
-            length = hops;
-            while(hops > 1) {	//BACKTRACK FROM THE END OF THE PATH TO THE START
-                Node current = map[lx][ly];
-                current.setType(5);
-                lx = current.getLastX();
-                ly = current.getLastY();
-                hops--;
-            }
-            solving = false;
-        }
+        }while(search);
+
+    }
+
+    private void expandNode(Node currentNode) {
+        for()
+    }
+
+    private void sortQue(ArrayList<Node> sort) {
+
+    }
+
+
 }
+

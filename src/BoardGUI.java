@@ -3,16 +3,13 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class BoardGUI extends JPanel implements ActionListener{
-    private int width = 300;
-    private int height = 300;
+    private int width = 450;
+    private int height = 450;
     private int cellSize = 30;
-
-    private Image emptyField;
-    private Image blackField;
 
     private Timer t;
 
-    private static Image[][] board;
+    private static Node[][] board;
 
     private int clickCounter = 1;
     private static int finishx;
@@ -26,9 +23,9 @@ public class BoardGUI extends JPanel implements ActionListener{
         setFocusable(true);
         setVisible(true);
 
-        board = new Image[width/cellSize][height/cellSize];
+        board = new Node[width/cellSize][height/cellSize];
 
-        init();
+        reset();
         randomWall();
 
         addMouseListener(new MouseListener2());
@@ -38,22 +35,16 @@ public class BoardGUI extends JPanel implements ActionListener{
 
     }
 
-    /**
-    *
-    */
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();
     }
-    
-    private void init(){
-        ImageIcon empty = new ImageIcon("weißes Feld.png");
-        emptyField = empty.getImage();
-        ImageIcon black = new ImageIcon("schwarzes Feld.png");
-        blackField = black.getImage();
-        for(int w = 0; w < (width/cellSize) ; w++){
-            for(int h = 0; h < (height/cellSize) ; h++){
-                board[w][h] = emptyField;
+
+
+    public void reset(){
+        for(int x = 0; x < (width/cellSize) ; x++){
+            for(int y = 0; y < (height/cellSize) ; y++){
+                board[x][y] = new Node(0, x,y);
             }
         }
     }
@@ -64,8 +55,8 @@ public class BoardGUI extends JPanel implements ActionListener{
         while (i < (amountCellRow*percentWall(50)) ){
             int w = (int) (Math.random()*amountCellRow);
             int h = (int) (Math.random()*amountCellRow);
-            if(!board[w][h].equals(blackField)){
-                board[w][h] = blackField;
+            if(!(board[w][h].getType() == 1)){
+                board[w][h].setType(1);
                 i++;
             }
         }
@@ -77,15 +68,13 @@ public class BoardGUI extends JPanel implements ActionListener{
         return (onePercent*percent);
     }
 
-    private void setStart(int x, int y){
+    private void setStartFinal(int x, int y){
         if(clickCounter == 1){
-            Image startFeld = new ImageIcon("start Feld.png").getImage();
-            board[x][y] = startFeld;
+            board[x][y].setType(2);
             startx = x;
             starty = y;
         }else if (clickCounter == 2) {
-            Image endFeld = new ImageIcon("ende Feld.png").getImage();
-            board[x][y] = endFeld;
+            board[x][y].setType(3);
             finishx = x;
             finishy = y;
         }
@@ -97,7 +86,22 @@ public class BoardGUI extends JPanel implements ActionListener{
         super.paintComponent(g);
         for (int w = 0; w < board.length;w++) {
             for (int h = 0; h < board[w].length; h++) {
-                g.drawImage(board[w][h], w*cellSize, h*cellSize, this);
+                // 0 = leer, 1 = wand, 2 = start, 3 = ende
+                if(board[w][h].getType() == 0) {
+                    g.setColor(Color.WHITE);
+                }
+                if(board[w][h].getType() == 1) {
+                    g.setColor(Color.BLACK);
+                }
+                if(board[w][h].getType() == 2) {
+                    g.setColor(Color.GREEN);
+                }
+                if(board[w][h].getType() == 3) {
+                    g.setColor(Color.RED);
+                }
+                g.fillRect(w*cellSize, h*cellSize, cellSize, cellSize);
+                g.setColor(Color.BLACK);
+                g.drawRect(w*cellSize, h*cellSize, cellSize, cellSize);
             }
         }
     }
@@ -118,6 +122,10 @@ public class BoardGUI extends JPanel implements ActionListener{
         return finishy;
     }
 
+    public static Node[][] getBoard() {
+        return board;
+    }
+
     private class MouseListener2 implements MouseListener{
 
         @Override
@@ -125,7 +133,7 @@ public class BoardGUI extends JPanel implements ActionListener{
             try {
                 int x = e.getX();
                 int y = e.getY();
-                setStart(x/cellSize,y/cellSize);
+                setStartFinal(x/cellSize,y/cellSize);
             } catch(Exception z) {
                 System.err.println(z);
             }

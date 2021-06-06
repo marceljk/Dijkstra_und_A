@@ -7,8 +7,8 @@ public class MainView extends JFrame {
     private PanelControl panelcontrol = new PanelControl();
     private static BoardGUI boardgui = new BoardGUI();
 
-    public static void setBoardgui(BoardGUI boardgui) {
-        MainView.boardgui = boardgui;
+    public static void resetBoard() {
+        MainView.boardgui.reset();
     }
 
     public MainView(){
