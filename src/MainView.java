@@ -6,10 +6,18 @@ public class MainView extends JFrame {
 
     private PanelControl panelcontrol = new PanelControl();
     private static BoardGUI boardgui = new BoardGUI();
+    private static A_Stern aStern = new A_Stern();
 
     public static void resetBoard() {
         MainView.boardgui.reset();
     }
+
+    public static void startAStern() {
+        if(aStern.searchPath()){
+
+        }
+    }
+
 
     public MainView(){
 

@@ -1,15 +1,18 @@
+import java.util.ArrayList;
+
 public class Node {
 
-    // 0 = leer, 1 = wand, 2 = start, 3 = ende
-    private int cellType = 0;
+    // 0 = leer, 1 = wand, 2 = start, 3 = ende, 4 = untersucht
+    private int cellType;
     private int hops;
     private int x;
     private int y;
     private int lastX;
     private int lastY;
     private double distanz = 0;
-    private static int finishx = BoardGUI.getFinishx();
-    private static int finishy = BoardGUI.getFinishy();
+    private double cost = 0;
+    private static int finishx;
+    private static int finishy;
 
     public Node(int type, int x, int y) {    //CONSTRUCTOR
         cellType = type;
@@ -25,6 +28,37 @@ public class Node {
         return distanz;
     }
 
+    /**
+     * Gibt alle Nachbarknoten von dem aktuellen Knoten zurück.
+     * @return
+     */
+    public ArrayList<Node> getSuccessor(){
+        ArrayList<Node> output = new ArrayList<Node>();
+        int counter = 0;
+        int cellsize = BoardGUI.getCellSize();
+        for(int xtemp = -1; xtemp <= 1; xtemp++){
+            for (int ytemp = -1; ytemp <= 1; ytemp++){
+                int randL = (x+(xtemp));
+                int randO = (y+(ytemp));
+                int randR = (x+(xtemp));
+                int randU = (y+(ytemp));
+                if(randL >= 0 && randO >= 0 && randR <= BoardGUI.getWidthX() && randU <= BoardGUI.getHeightY()){
+                    if(x == 0 && y == 0){
+                        continue;
+                    }
+                    Node temp = BoardGUI.getBoard()[x+xtemp][y+ytemp];
+                    if(temp.getType() != 1){
+                        output.add(BoardGUI.getBoard()[x+xtemp][y+ytemp]);
+                        counter++;
+                    }
+                    if(!(temp.getType() == 3 || temp.getType() == 2)){
+                        temp.setType(4);
+                    }
+                }
+            }
+        }
+        return output;
+    }
 
     public int getX() {
         return x;
@@ -48,6 +82,25 @@ public class Node {
 
     public int getHops() {
         return hops;
+    }
+
+    public double getCost(){
+        cost = getEuclidDist();
+        return cost;
+    }
+
+    public void setCost(double cost){
+        this.cost = cost;
+    }
+
+    public static int getFinishx() {
+        finishx = BoardGUI.getFinishx();
+        return finishx;
+    }
+
+    public static int getFinishy() {
+        finishy = BoardGUI.getFinishy();
+        return finishy;
     }
 
     public void setType(int type) {

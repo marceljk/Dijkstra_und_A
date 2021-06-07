@@ -1,3 +1,5 @@
+import com.sun.tools.javac.Main;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -32,7 +34,8 @@ public class PanelControl extends JPanel {
         });
 
         start.addActionListener(e -> {
-
+            //MainView.startAlgorithm();
+            MainView.startAStern();
         });
 
     }

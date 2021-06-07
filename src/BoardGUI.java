@@ -3,9 +3,9 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class BoardGUI extends JPanel implements ActionListener{
-    private int width = 450;
-    private int height = 450;
-    private int cellSize = 30;
+    private static int widthX = 300;
+    private static int height = 300;
+    private static int cellSize = 30;
 
     private Timer t;
 
@@ -18,15 +18,15 @@ public class BoardGUI extends JPanel implements ActionListener{
     private static int starty;
 
     public BoardGUI(){
-        setPreferredSize(new Dimension(width, height));
+        setPreferredSize(new Dimension(widthX, height));
         setBackground(Color.WHITE);
         setFocusable(true);
         setVisible(true);
 
-        board = new Node[width/cellSize][height/cellSize];
+        board = new Node[widthX /cellSize][height/cellSize];
 
         reset();
-        randomWall();
+        //randomWall();
 
         addMouseListener(new MouseListener2());
 
@@ -42,7 +42,7 @@ public class BoardGUI extends JPanel implements ActionListener{
 
 
     public void reset(){
-        for(int x = 0; x < (width/cellSize) ; x++){
+        for(int x = 0; x < (widthX /cellSize) ; x++){
             for(int y = 0; y < (height/cellSize) ; y++){
                 board[x][y] = new Node(0, x,y);
             }
@@ -51,7 +51,7 @@ public class BoardGUI extends JPanel implements ActionListener{
 
     private void randomWall(){
         int i = 0;
-        int amountCellRow = ((width+height)/2)/cellSize;
+        int amountCellRow = ((widthX +height)/2)/cellSize;
         while (i < (amountCellRow*percentWall(50)) ){
             int w = (int) (Math.random()*amountCellRow);
             int h = (int) (Math.random()*amountCellRow);
@@ -63,7 +63,7 @@ public class BoardGUI extends JPanel implements ActionListener{
     }
 
     private double percentWall(int percent){
-        double onePercent = (width/cellSize);
+        double onePercent = (widthX /cellSize);
         onePercent /= 100;
         return (onePercent*percent);
     }
@@ -99,8 +99,12 @@ public class BoardGUI extends JPanel implements ActionListener{
                 if(board[w][h].getType() == 3) {
                     g.setColor(Color.RED);
                 }
+                if(board[w][h].getType() == 4) {
+                    g.setColor(Color.CYAN);
+                }
                 g.fillRect(w*cellSize, h*cellSize, cellSize, cellSize);
                 g.setColor(Color.BLACK);
+                g.drawString(w + "|" + h , w*cellSize, (h*cellSize)+cellSize);
                 g.drawRect(w*cellSize, h*cellSize, cellSize, cellSize);
             }
         }
@@ -122,8 +126,22 @@ public class BoardGUI extends JPanel implements ActionListener{
         return finishy;
     }
 
+    public static Node getFinishNode(){return board[finishx][finishy];}
+
     public static Node[][] getBoard() {
         return board;
+    }
+
+    public static int getCellSize() {
+        return cellSize;
+    }
+
+    public static int getWidthX() {
+        return widthX;
+    }
+
+    public static int getHeightY() {
+        return height;
     }
 
     private class MouseListener2 implements MouseListener{
