@@ -33,25 +33,31 @@ public class Node {
      * @return
      */
     public ArrayList<Node> getSuccessor(){
-        ArrayList<Node> output = new ArrayList<Node>();
+        ArrayList<Node> output = new ArrayList<>();
         int counter = 0;
         int cellsize = BoardGUI.getCellSize();
+        Node temp = this;
         for(int xtemp = -1; xtemp <= 1; xtemp++){
             for (int ytemp = -1; ytemp <= 1; ytemp++){
-                int randL = (x+(xtemp));
+                int randL = (x+(xtemp));            // TODO: Zusammenfassen
                 int randO = (y+(ytemp));
                 int randR = (x+(xtemp));
                 int randU = (y+(ytemp));
-                if(randL >= 0 && randO >= 0 && randR <= BoardGUI.getWidthX() && randU <= BoardGUI.getHeightY()){
-                    if(x == 0 && y == 0){
+                if(randL >= 0 && randO >= 0 && randR < (BoardGUI.getWidthX()/cellsize) && randU < (BoardGUI.getHeightY()/cellsize)){
+                    if(xtemp == 0 && ytemp == 0){
                         continue;
                     }
-                    Node temp = BoardGUI.getBoard()[x+xtemp][y+ytemp];
+                    try {
+                        temp = BoardGUI.getBoard()[x+xtemp][y+ytemp];
+                    }catch (Exception exception){
+                        System.err.println("x: " + x + " xtemp: " + xtemp);
+                        System.err.println("y: " + y + " ytemp:" + ytemp);
+                    }
                     if(temp.getType() != 1){
                         output.add(BoardGUI.getBoard()[x+xtemp][y+ytemp]);
                         counter++;
                     }
-                    if(!(temp.getType() == 3 || temp.getType() == 2)){
+                    if(!(temp.getType() == 3 || temp.getType() == 2 || temp.getType() == 1)){
                         temp.setType(4);
                     }
                 }

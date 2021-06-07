@@ -3,15 +3,15 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class BoardGUI extends JPanel implements ActionListener{
-    private static int widthX = 300;
-    private static int height = 300;
+    private static int widthX = 750;
+    private static int height = 750;
     private static int cellSize = 30;
 
     private Timer t;
 
     private static Node[][] board;
 
-    private int clickCounter = 1;
+    private int clickCounter;
     private static int finishx;
     private static int finishy;
     private static int startx;
@@ -26,7 +26,6 @@ public class BoardGUI extends JPanel implements ActionListener{
         board = new Node[widthX /cellSize][height/cellSize];
 
         reset();
-        //randomWall();
 
         addMouseListener(new MouseListener2());
 
@@ -42,17 +41,23 @@ public class BoardGUI extends JPanel implements ActionListener{
 
 
     public void reset(){
+        clickCounter = 1;
+        finishx = 0;
+        finishy = 0;
+        startx = 0;
+        starty = 0;
         for(int x = 0; x < (widthX /cellSize) ; x++){
             for(int y = 0; y < (height/cellSize) ; y++){
                 board[x][y] = new Node(0, x,y);
             }
         }
+        randomWall();
     }
 
     private void randomWall(){
         int i = 0;
         int amountCellRow = ((widthX +height)/2)/cellSize;
-        while (i < (amountCellRow*percentWall(50)) ){
+        while (i < (amountCellRow*percentWall(55)) ){
             int w = (int) (Math.random()*amountCellRow);
             int h = (int) (Math.random()*amountCellRow);
             if(!(board[w][h].getType() == 1)){
@@ -73,12 +78,14 @@ public class BoardGUI extends JPanel implements ActionListener{
             board[x][y].setType(2);
             startx = x;
             starty = y;
+            clickCounter++;
+        }else if (x == startx && y == starty){
         }else if (clickCounter == 2) {
             board[x][y].setType(3);
             finishx = x;
             finishy = y;
+            clickCounter++;
         }
-        clickCounter ++;
     }
 
     @Override
