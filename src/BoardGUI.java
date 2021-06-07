@@ -102,6 +102,9 @@ public class BoardGUI extends JPanel implements ActionListener{
                 if(board[w][h].getType() == 4) {
                     g.setColor(Color.CYAN);
                 }
+                if(board[w][h].getType() == 5) {
+                    g.setColor(Color.YELLOW);
+                }
                 g.fillRect(w*cellSize, h*cellSize, cellSize, cellSize);
                 g.setColor(Color.BLACK);
                 g.drawString(w + "|" + h , w*cellSize, (h*cellSize)+cellSize);

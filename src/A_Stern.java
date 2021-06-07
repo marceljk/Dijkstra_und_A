@@ -37,6 +37,7 @@ public class A_Stern {
             openlist.remove(min);
             if(currentNode == end){                 //Prüft ob currentNode der Zielknoten ist
                 System.out.println("Weg gefunden!");
+                showPath(currentNode);
                 return true;
             }
             closedList.add(currentNode);            //Damit der Knoten nicht wiederholt geprüft wird
@@ -84,6 +85,17 @@ public class A_Stern {
             }
             openlist.put(cost, successor);
         }
+    }
+
+    private void showPath(Node lastNode){
+        int x;
+        int y;
+        do{
+            x = lastNode.getLastX();
+            y = lastNode.getLastY();
+            lastNode = BoardGUI.getBoard()[x][y];
+            lastNode.setType(5);
+        }while ((x != BoardGUI.getStartx()) && (y != BoardGUI.getStarty()));
     }
 
     private void sortQue(ArrayList<Node> sort) {

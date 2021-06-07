@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class Node {
 
-    // 0 = leer, 1 = wand, 2 = start, 3 = ende, 4 = untersucht
+    // 0 = leer, 1 = wand, 2 = start, 3 = ende, 4 = untersucht, 5 = weg
     private int cellType;
     private int hops;
     private int x;
