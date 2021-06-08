@@ -84,6 +84,7 @@ public class Node {
         return cellType;
     }
 
+    //TODO: Anzahl der Schritte die gelaufen werden müssen
     public int getHops() {
         return hops;
     }
@@ -116,6 +117,7 @@ public class Node {
         lastY = y;
     }
 
+    //TODO: Anzahl der Schritte die gelaufen werden müssen
     public void setHops(int hops) {
         this.hops = hops;
     }

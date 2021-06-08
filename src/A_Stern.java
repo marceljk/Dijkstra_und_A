@@ -11,7 +11,6 @@ public class A_Stern extends Thread {
     private boolean search;
     private Node end;
 
-
     public void searchPath(){
         openlist = new HashMap<>();
         closedList = new ArrayList<>();
