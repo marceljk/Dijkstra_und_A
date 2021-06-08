@@ -12,11 +12,9 @@ public class MainView extends JFrame {
         MainView.boardgui.reset();
     }
 
-    synchronized public static void startAStern() {
+    public static void startAStern() {
         aStern.searchPath();
-
     }
-
 
     public MainView(){
 

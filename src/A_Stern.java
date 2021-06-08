@@ -2,7 +2,7 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class A_Stern {
+public class A_Stern extends Thread {
 
     private Node node;
     private HashMap<Double, Node> openlist;
@@ -12,14 +12,13 @@ public class A_Stern {
     private Node end;
 
 
-    synchronized public void searchPath(){
+    public void searchPath(){
         openlist = new HashMap<>();
         closedList = new ArrayList<>();
         openlist.put(0.0, BoardGUI.getBoard()[BoardGUI.getStartx()][BoardGUI.getStarty()]);
         search = true;
         Node currentNode;
         end = BoardGUI.getFinishNode();
-
         do {
             double min = Double.MAX_VALUE;
             for(Double key: openlist.keySet()){     //Suche Knoten mit niedrigsten Kosten
@@ -32,6 +31,11 @@ public class A_Stern {
                 System.out.println("Kein Weg gefunden!");
                 break;
             }
+            try {
+                Thread.sleep(50);               //Thread wartet auf vorherige Operationen, um Fehler zu vermeiden
+            } catch (Exception e) {
+
+            }
             currentNode = openlist.get(min);        //Neuer Knoten wird zum aktuellen Knoten
             openlist.remove(min);
             if(currentNode == end){                 //Prüft ob currentNode der Zielknoten ist
@@ -39,37 +43,40 @@ public class A_Stern {
                 showPath(currentNode);
                 search = false;
                 break;
-                //return true;
             }
             closedList.add(currentNode);            //Damit der Knoten nicht wiederholt geprüft wird
 
-            System.out.println("Currentnode: " + currentNode.getX() + " " + currentNode.getY());
+            //System.out.println("Currentnode: " + currentNode.getX() + " " + currentNode.getY());
 
             expandNode(currentNode);
 
         }while(search);
-        //return false;
     }
 
     /**
      * Nachbarknoten werden überprüft.
      * @param currentNode
      */
-    synchronized private void expandNode(Node currentNode) {
+    private void expandNode(Node currentNode) {
         for(Node successor: currentNode.getSuccessor()){
             if(closedList.contains(successor)){
                 continue;
             }
+
+            /*
             System.out.println("_______________");
             System.out.println(successor.getX());
             System.out.println(successor.getY());
             System.out.println(successor.getEuclidDist());
+             */
+
             double cost = currentNode.getCost() + successor.getEuclidDist();
 
-            if(openlist.containsValue(successor) && cost >= (currentNode.getCost() + currentNode.getEuclidDist())){
-                continue;
+            if(openlist.containsValue(successor) && cost >= (currentNode.getCost() + currentNode.getEuclidDist())){     //Wenn der Nachbarknoten in der Liste höhere Kosten als der zu betrachtende Knoten,
+                continue;                                                                                               //dann wird dieser nicht weiter betrachtet.
             }
-            successor.setLastNode(currentNode.getX(), currentNode.getY());
+
+            successor.setLastNode(currentNode.getX(), currentNode.getY());          // Speichert den letzten Schritt, damit wir den Gesamtweg am Ende anzeigen können (ff.)
             successor.setCost(cost);
             if(openlist.containsValue(successor)){
                 try{
@@ -79,7 +86,7 @@ public class A_Stern {
                         }
                     }
                 }catch (Exception e){
-
+                    System.err.println(e);
                 }
 
             }
@@ -87,6 +94,10 @@ public class A_Stern {
         }
     }
 
+    /**
+     * Zeigt am Ende den richtigen Weg in Gelb an.
+     * @param lastNode
+     */
     private void showPath(Node lastNode){
         int x;
         int y;
@@ -100,11 +111,6 @@ public class A_Stern {
                 lastNode.setType(5);
             }
     }
-
-    private void sortQue(ArrayList<Node> sort) {
-
-    }
-
 
 }
 

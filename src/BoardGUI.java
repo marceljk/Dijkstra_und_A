@@ -3,15 +3,15 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class BoardGUI extends JPanel implements ActionListener{
-    private static int widthX = 750;
-    private static int height = 750;
+    private static int widthX = 450;
+    private static int height = 450;
     private static int cellSize = 30;
 
     private Timer t;
 
     private static Node[][] board;
 
-    private int clickCounter;
+    private int clickCounter = 1;
     private static int finishx;
     private static int finishy;
     private static int startx;
@@ -29,11 +29,15 @@ public class BoardGUI extends JPanel implements ActionListener{
 
         addMouseListener(new MouseListener2());
 
-        t = new Timer(200, this);
+        t = new Timer(200, this);       //Aktualisiert die Gui laufend
         t.start();
 
     }
 
+    /**
+     * Aktualisiert nach jeder Aktion das Programm/GUI.
+     * @param e
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         repaint();
@@ -41,11 +45,7 @@ public class BoardGUI extends JPanel implements ActionListener{
 
 
     public void reset(){
-        clickCounter = 1;
-        finishx = 0;
-        finishy = 0;
-        startx = 0;
-        starty = 0;
+        clickCounter = 1;           // Damit man einen neuen Start- / und Endpunkt setzten kann.
         for(int x = 0; x < (widthX /cellSize) ; x++){
             for(int y = 0; y < (height/cellSize) ; y++){
                 board[x][y] = new Node(0, x,y);
@@ -73,21 +73,26 @@ public class BoardGUI extends JPanel implements ActionListener{
         return (onePercent*percent);
     }
 
+
     private void setStartFinal(int x, int y){
-        if(clickCounter == 1){
+        if(clickCounter == 1) {
             board[x][y].setType(2);
             startx = x;
             starty = y;
-            clickCounter++;
-        }else if (x == startx && y == starty){
+            clickCounter ++;
+        }else if(x == startx && y == starty){
         }else if (clickCounter == 2) {
             board[x][y].setType(3);
             finishx = x;
             finishy = y;
-            clickCounter++;
+            clickCounter ++;
         }
     }
 
+    /**
+     * Prüft, um welche Art von "Kästchen" es sich handelt und färbt es entsprechend.
+     * @param g
+     */
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
