@@ -43,7 +43,6 @@ public class BoardGUI extends JPanel implements ActionListener{
         repaint();
     }
 
-
     public void reset(){
         clickCounter = 1;           // Damit man einen neuen Start- / und Endpunkt setzten kann.
         for(int x = 0; x < (widthX /cellSize) ; x++){
@@ -73,7 +72,6 @@ public class BoardGUI extends JPanel implements ActionListener{
         return (onePercent*percent);
     }
 
-
     private void setStartFinal(int x, int y){
         if(clickCounter == 1) {
             board[x][y].setType(2);
@@ -87,6 +85,45 @@ public class BoardGUI extends JPanel implements ActionListener{
             finishy = y;
             clickCounter ++;
         }
+    }
+
+    /**
+     * Erstellt ein Raster mit einer U Form, um A* darstellen zu können.
+     */
+    public void beispiel1AStern() {
+        allWhite();
+
+        for (int j = 5; j <= 10; j++) {
+            if(!(board[4][j].getType() == 1)){
+                board[4][j].setType(1);
+            }
+        }
+        for (int j = 5; j <= 10; j++) {
+            if(!(board[11][j].getType() == 1)){
+                board[11][j].setType(1);
+            }
+        }
+        for (int j = 4; j <= 10; j++) {
+            if(!(board[j][10].getType() == 1)){
+                board[j][10].setType(1);
+            }
+        }
+
+
+    }
+
+    public void allWhite() {
+        int amountCellRow = ((widthX +height)/2)/cellSize;
+        for (int i = 0; i < amountCellRow; i++) {
+            for (int j = 0; j < amountCellRow; j++) {
+                if(!(board[i][j].getType() == 0)){
+                    board[i][j].setType(0);
+                }
+            }
+        }
+
+
+
     }
 
     /**

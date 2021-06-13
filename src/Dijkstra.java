@@ -4,10 +4,10 @@
 public class Dijkstra {
 
     public void searchPath() {
-        initialisiere();
+        initialisiere(BoardGUI.getBoard()[BoardGUI.getStartx()][BoardGUI.getStarty()]);
     }
 
-    private void initialisiere() {
+    private void initialisiere(Node startKnoten) {
 
     }
 

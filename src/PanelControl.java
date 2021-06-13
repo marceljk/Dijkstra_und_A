@@ -6,6 +6,9 @@ public class PanelControl extends JPanel {
 
     private JButton start = new JButton("Starte");
     private JButton reset = new JButton("Zurücksetzen");
+    private JButton b1Astern = new JButton("Beispiel 1 A*");
+
+
 
     private String[] algorithms = {"Dijkstra", "A*"};
 
@@ -28,8 +31,16 @@ public class PanelControl extends JPanel {
         gbc.gridy = 2;
         this.add(algorithm,gbc);
 
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        this.add(b1Astern,gbc);
+
         reset.addActionListener(e -> {
             MainView.resetBoard();
+        });
+
+        b1Astern.addActionListener(e -> {
+            MainView.beispiel1AStern();
         });
 
         start.addActionListener(e -> {

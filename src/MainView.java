@@ -23,6 +23,10 @@ public class MainView extends JFrame {
         dijkstra.searchPath();
     }
 
+    public static void beispiel1AStern() {
+        MainView.boardgui.beispiel1AStern();
+    }
+
     public MainView(){
 
         // Layout
