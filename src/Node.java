@@ -7,8 +7,8 @@ public class Node {
     private int hops;
     private int x;
     private int y;
-    private int lastX;
-    private int lastY;
+    private int lastX = -1;
+    private int lastY = -1;
     private double distanz = 0;
     private double cost = 0;
     private static int finishx;

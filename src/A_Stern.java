@@ -8,13 +8,19 @@ public class A_Stern extends Thread {
     private HashMap<Double, Node> openlist;
     private ArrayList<Node> closedList;
     private ArrayList<Node> sortList;
+    private static boolean firstTime = true;
     private boolean search;
     private Node end;
+    private boolean debug = false;
 
     public void searchPath(){
-        openlist = new HashMap<>();
-        closedList = new ArrayList<>();
-        openlist.put(0.0, BoardGUI.getBoard()[BoardGUI.getStartx()][BoardGUI.getStarty()]);
+        //if(firstTime){
+            openlist = new HashMap<>();
+            closedList = new ArrayList<>();
+            openlist.put(0.0, BoardGUI.getBoard()[BoardGUI.getStartx()][BoardGUI.getStarty()]);
+            firstTime = false;
+        //}
+
         search = true;
         Node currentNode;
         end = BoardGUI.getFinishNode();
@@ -75,8 +81,23 @@ public class A_Stern extends Thread {
                 continue;                                                                                               //dann wird dieser nicht weiter betrachtet.
             }
 
-            successor.setLastNode(currentNode.getX(), currentNode.getY());          // Speichert den letzten Schritt, damit wir den Gesamtweg am Ende anzeigen können (ff.)
-            successor.setCost(cost);
+            if(debug){
+                //TODO: Prüfe ob lastNode bei successor schon gesetzt wurde und ob er weiter entfernt
+                // zum Ziel ist als vom currentNode
+                if(successor.getLastX() != -1 && successor.getLastX() != -1){
+                    Node lastNode = BoardGUI.getBoard()[successor.getLastX()][successor.getLastY()];
+                    if(lastNode.getEuclidDist() > cost){
+                        successor.setLastNode(currentNode.getX(), currentNode.getY());          // Speichert den letzten Schritt, damit wir den Gesamtweg am Ende anzeigen können (ff.)
+                        successor.setCost(cost);
+                    }
+                }
+            }else {
+                successor.setLastNode(currentNode.getX(), currentNode.getY());          // Speichert den letzten Schritt, damit wir den Gesamtweg am Ende anzeigen können (ff.)
+                successor.setCost(cost);
+            }
+
+
+
             if(openlist.containsValue(successor)){
                 try{
                     for(Double key: openlist.keySet()){
