@@ -19,6 +19,7 @@ public class Node {
         this.x = x;
         this.y = y;
         hops = -1;
+        setCost();
     }
 
     /**
@@ -54,9 +55,6 @@ public class Node {
                         output.add(gui.getBoard()[x+xtemp][y+ytemp]);
                         counter++;
                     }
-                    if(!(temp.getType() == 3 || temp.getType() == 2 || temp.getType() == 1)){   //Prüft ob der Knoten nicht ein Start-, Zielfeld oder eine Wand ist.
-                        temp.setType(4);
-                    }
                 }
             }
         }
@@ -90,22 +88,35 @@ public class Node {
     }
 
     public double getCost(){
-        switch (getType()) {
-            case 0:
-                return 1;
-            case 1:
-                return Double.MAX_VALUE;
-            case 6:
-                return Double.MAX_VALUE;
-            case 7:
-                return 10;
-            case 8:
-                return 5;
-            default:
-                return 1;
-        }
+        return cost;
     }
 
+    private void setCost(){
+        switch (getType()) {
+            case 0:
+                cost = 0;
+                break;
+            case 1:
+                cost = Double.MAX_VALUE;
+                break;
+            case 4:
+                break;
+            case 6:
+                cost = 2000;
+                break;
+            case 7:
+                cost = 10;
+                break;
+            case 8:
+                cost = 5;
+                break;
+            default:
+                cost = 0;
+                break;
+        }
+
+
+    }
 
     public void setGui(BoardGUI gui) {
         this.gui = gui;
@@ -122,6 +133,7 @@ public class Node {
     // 0 = leer, 1 = wand, 2 = start, 3 = ende, 4 = untersucht, 5 = weg
     public void setType(int type) {
         cellType = type;
+        setCost();
     }
 
     public void setLastNode(int x, int y) {
