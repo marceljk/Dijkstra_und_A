@@ -91,6 +91,7 @@ public class A_Stern implements Runnable{
             System.out.println(successor.getEuclidDist());
              */
 
+
             double cost = currentNode.getCostFromStart() + successor.getCost();
 
             if(openlist.containsValue(successor) && cost >= (successor.getCostFromStart())){     //Wenn der Nachbarknoten in der Liste höhere Kosten als der zu betrachtende Knoten,
@@ -114,6 +115,12 @@ public class A_Stern implements Runnable{
                 successor.setLastNode(currentNode.getX(), currentNode.getY());          // Speichert den letzten Schritt, damit wir den Gesamtweg am Ende anzeigen können (ff.)
                 successor.setCostFromStart(cost);
             }
+
+
+            if(!(successor.getType() == 3 || successor.getType() == 2 || successor.getType() == 1)){   //Prüft ob der Knoten nicht ein Start-, Zielfeld oder eine Wand ist.
+                successor.setType(4);
+            }
+
 
 
 
