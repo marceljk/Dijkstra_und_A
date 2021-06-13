@@ -56,6 +56,11 @@ public class A_Stern implements Runnable{
             }
              */
 
+            try {
+                TimeUnit.MILLISECONDS.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
 
             currentNode = openlist.get(min);        //Neuer Knoten wird zum aktuellen Knoten
             openlist.remove(min);
