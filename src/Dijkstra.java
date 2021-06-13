@@ -3,8 +3,8 @@
  */
 public class Dijkstra {
 
-    public void searchPath() {
-        initialisiere(BoardGUI.getBoard()[BoardGUI.getStartx()][BoardGUI.getStarty()]);
+    public void searchPath(BoardGUI gui) {
+        initialisiere(gui.getBoard()[BoardGUI.getStartx()][BoardGUI.getStarty()]);
     }
 
     private void initialisiere(Node startKnoten) {

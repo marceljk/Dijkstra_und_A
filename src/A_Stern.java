@@ -1,29 +1,40 @@
 
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.TimeUnit;
 
-public class A_Stern extends Thread {
+public class A_Stern implements Runnable{
 
     private Node node;
     private HashMap<Double, Node> openlist;
     private ArrayList<Node> closedList;
     private ArrayList<Node> sortList;
-    private static boolean firstTime = true;
     private boolean search;
     private Node end;
-    private boolean debug = false;
+    private boolean debug = true;
+    private BoardGUI gui;
+
+    @Override
+    public void run() {
+        searchPath();
+    }
+
+    public void setGui(BoardGUI gui){
+        this.gui = gui;
+    }
+
 
     public void searchPath(){
-        //if(firstTime){
-            openlist = new HashMap<>();
-            closedList = new ArrayList<>();
-            openlist.put(0.0, BoardGUI.getBoard()[BoardGUI.getStartx()][BoardGUI.getStarty()]);
-            firstTime = false;
-        //}
+        openlist = new HashMap<>();
+        closedList = new ArrayList<>();
+        openlist.put(0.0, gui.getBoard()[BoardGUI.getStartx()][BoardGUI.getStarty()]);
 
         search = true;
         Node currentNode;
-        end = BoardGUI.getFinishNode();
+        end = gui.getFinishNode();
         do {
             double min = Double.MAX_VALUE;
             for(Double key: openlist.keySet()){     //Suche Knoten mit niedrigsten Kosten
@@ -31,16 +42,21 @@ public class A_Stern extends Thread {
                     min = key;
                 }
             }
+
             if(openlist.size() <= 0){               //Wenn Kein Startpunkt vorhanden, dann Suche beenden
                 search = false;
                 System.out.println("Kein Weg gefunden!");
                 break;
             }
-            try {
+
+            /*try {
                 Thread.sleep(50);               //Thread wartet auf vorherige Operationen, um Fehler zu vermeiden
             } catch (Exception e) {
 
             }
+             */
+
+
             currentNode = openlist.get(min);        //Neuer Knoten wird zum aktuellen Knoten
             openlist.remove(min);
             if(currentNode == end){                 //Prüft ob currentNode der Zielknoten ist
@@ -56,6 +72,10 @@ public class A_Stern extends Thread {
             expandNode(currentNode);
 
         }while(search);
+    }
+
+    public boolean getSearch() {
+        return search;
     }
 
     /**
@@ -82,15 +102,18 @@ public class A_Stern extends Thread {
             }
 
             if(debug){
-                //TODO: Prüfe ob lastNode bei successor schon gesetzt wurde und ob er weiter entfernt
-                // zum Ziel ist als vom currentNode
-                if(successor.getLastX() != -1 && successor.getLastX() != -1){
-                    Node lastNode = BoardGUI.getBoard()[successor.getLastX()][successor.getLastY()];
+                //Prüfe ob lastNode bei successor schon gesetzt wurde und ob er weiter entfernt zum Ziel ist als vom currentNode
+                if(successor.isLastNodeSet()){
+                    Node lastNode = gui.getBoard()[currentNode.getLastX()][currentNode.getLastY()];
                     if(lastNode.getEuclidDist() > cost){
                         successor.setLastNode(currentNode.getX(), currentNode.getY());          // Speichert den letzten Schritt, damit wir den Gesamtweg am Ende anzeigen können (ff.)
                         successor.setCost(cost);
                     }
+                } else {
+                    successor.setLastNode(currentNode.getX(), currentNode.getY());          // Speichert den letzten Schritt, damit wir den Gesamtweg am Ende anzeigen können (ff.)
+                    successor.setCost(cost);
                 }
+
             }else {
                 successor.setLastNode(currentNode.getX(), currentNode.getY());          // Speichert den letzten Schritt, damit wir den Gesamtweg am Ende anzeigen können (ff.)
                 successor.setCost(cost);
@@ -124,8 +147,8 @@ public class A_Stern extends Thread {
             for (int i = 0; i < 100; i++){
                 x = lastNode.getLastX();
                 y = lastNode.getLastY();
-                lastNode = BoardGUI.getBoard()[x][y];
-                if((x == BoardGUI.getStartx()) && (y == BoardGUI.getStarty())) {
+                lastNode = gui.getBoard()[x][y];
+                if((x == gui.getStartx()) && (y == gui.getStarty())) {
                     break;
                 }
                 lastNode.setType(5);

@@ -2,17 +2,18 @@ import java.util.ArrayList;
 
 public class Node {
 
-
     private int cellType;
     private int hops;
-    private int x;
-    private int y;
-    private int lastX = -1;
-    private int lastY = -1;
+    private final int x;
+    private final int y;
+    private int lastX;
+    private int lastY;
+    private boolean lastNodeSet = false;
     private double distanz = 0;
     private double cost = 0;
     private static int finishx;
     private static int finishy;
+    private BoardGUI gui;
 
     public Node(int type, int x, int y) {
         cellType = type;
@@ -39,19 +40,19 @@ public class Node {
     public ArrayList<Node> getSuccessor(){
         ArrayList<Node> output = new ArrayList<>();
         int counter = 0;
-        int cellsize = BoardGUI.getCellSize();
+        int cellsize = gui.getCellSize();
         Node temp = this;
         for(int xtemp = -1; xtemp <= 1; xtemp++){
             for (int ytemp = -1; ytemp <= 1; ytemp++){
                 int randX = (x+(xtemp));
                 int randY = (y+(ytemp));
-                if(randX >= 0 && randY >= 0 && randX < (BoardGUI.getWidthX()/cellsize) && randY < (BoardGUI.getHeightY()/cellsize)){
+                if(randX >= 0 && randY >= 0 && randX < (gui.getWidthX()/cellsize) && randY < (gui.getHeightY()/cellsize)){
                     if(xtemp == 0 && ytemp == 0){           //Prüft, ob man den Ürsprungsknoten betrachtet.
                         continue;
                     }
-                    temp = BoardGUI.getBoard()[x+xtemp][y+ytemp];
+                    temp = gui.getBoard()[x+xtemp][y+ytemp];
                     if(temp.getType() != 1){                //Prüft ob der Knoten nicht eine Wand ist.
-                        output.add(BoardGUI.getBoard()[x+xtemp][y+ytemp]);
+                        output.add(gui.getBoard()[x+xtemp][y+ytemp]);
                         counter++;
                     }
                     if(!(temp.getType() == 3 || temp.getType() == 2 || temp.getType() == 1)){   //Prüft ob der Knoten nicht ein Start-, Zielfeld oder eine Wand ist.
@@ -97,6 +98,10 @@ public class Node {
         this.cost = cost;
     }
 
+    public void setGui(BoardGUI gui) {
+        this.gui = gui;
+    }
+
     public static int getFinishx() {
         finishx = BoardGUI.getFinishx();
         return finishx;
@@ -115,6 +120,11 @@ public class Node {
     public void setLastNode(int x, int y) {
         lastX = x;
         lastY = y;
+        lastNodeSet = true;
+    }
+
+    public boolean isLastNodeSet() {
+        return lastNodeSet;
     }
 
     //TODO: Anzahl der Schritte die gelaufen werden müssen

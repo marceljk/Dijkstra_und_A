@@ -1,6 +1,7 @@
 import javax.swing.*;
 
 import java.awt.*;
+import java.util.concurrent.TimeUnit;
 
 public class MainView extends JFrame {
 
@@ -10,17 +11,20 @@ public class MainView extends JFrame {
     private static Dijkstra dijkstra = new Dijkstra();
 
     public static void resetBoard() {
-        MainView.boardgui.reset();
+        boardgui.reset();
     }
 
     public static void startAStern() {
         System.out.println("A* wurde gestartet");
-        aStern.searchPath();
+        aStern.setGui(boardgui);
+        Thread x = new Thread(aStern);
+        x.start();
+        //aStern.searchPath();
     }
 
     public static void startDijkstra() {
         System.out.println("Dijkstra wurde gestartet");
-        dijkstra.searchPath();
+        dijkstra.searchPath(boardgui);
     }
 
     public static void beispiel1AStern() {

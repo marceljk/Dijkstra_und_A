@@ -9,7 +9,7 @@ public class BoardGUI extends JPanel implements ActionListener{
 
     private Timer t;
 
-    private static Node[][] board;
+    private Node[][] board;
 
     private int clickCounter = 1;
     private static int finishx;
@@ -34,6 +34,7 @@ public class BoardGUI extends JPanel implements ActionListener{
 
     }
 
+
     /**
      * Aktualisiert nach jeder Aktion das Programm/GUI.
      * @param e
@@ -48,6 +49,7 @@ public class BoardGUI extends JPanel implements ActionListener{
         for(int x = 0; x < (widthX /cellSize) ; x++){
             for(int y = 0; y < (height/cellSize) ; y++){
                 board[x][y] = new Node(0, x,y);
+                board[x][y].setGui(this);
             }
         }
         randomWall();
@@ -131,6 +133,7 @@ public class BoardGUI extends JPanel implements ActionListener{
         }
     }
 
+
     /**
      * Prüft, um welche Art von "Kästchen" es sich handelt und färbt es entsprechend.
      * @param g
@@ -183,9 +186,9 @@ public class BoardGUI extends JPanel implements ActionListener{
         return finishy;
     }
 
-    public static Node getFinishNode(){return board[finishx][finishy];}
+    public Node getFinishNode(){return board[finishx][finishy];}
 
-    public static Node[][] getBoard() {
+    public Node[][] getBoard() {
         return board;
     }
 
