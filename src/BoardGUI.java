@@ -92,7 +92,17 @@ public class BoardGUI extends JPanel implements ActionListener{
      */
     public void beispiel1AStern() {
         allWhite();
+        //Startpunkt
+        startx = 7;
+        starty = 3;
+        board[startx][starty].setType(2);
 
+        //Zielpunkt
+        finishx = 7;
+        finishy = 13;
+        board[finishx][finishy].setType(3);
+
+        // U Form
         for (int j = 5; j <= 10; j++) {
             if(!(board[4][j].getType() == 1)){
                 board[4][j].setType(1);
@@ -108,8 +118,6 @@ public class BoardGUI extends JPanel implements ActionListener{
                 board[j][10].setType(1);
             }
         }
-
-
     }
 
     public void allWhite() {
@@ -121,9 +129,6 @@ public class BoardGUI extends JPanel implements ActionListener{
                 }
             }
         }
-
-
-
     }
 
     /**
