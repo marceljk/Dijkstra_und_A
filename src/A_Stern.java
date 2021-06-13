@@ -49,18 +49,12 @@ public class A_Stern implements Runnable{
                 break;
             }
 
-            /*try {
-                Thread.sleep(50);               //Thread wartet auf vorherige Operationen, um Fehler zu vermeiden
+            try {
+                Thread.sleep(500);               //Thread wartet auf vorherige Operationen, um Fehler zu vermeiden
             } catch (Exception e) {
 
             }
-             */
 
-            try {
-                TimeUnit.MILLISECONDS.sleep(50);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
 
             currentNode = openlist.get(min);        //Neuer Knoten wird zum aktuellen Knoten
             openlist.remove(min);
@@ -79,9 +73,6 @@ public class A_Stern implements Runnable{
         }while(search);
     }
 
-    public boolean getSearch() {
-        return search;
-    }
 
     /**
      * Nachbarknoten werden überprüft.
@@ -129,8 +120,9 @@ public class A_Stern implements Runnable{
             if(openlist.containsValue(successor)){
                 try{
                     for(Double key: openlist.keySet()){
-                        if(openlist.get(key).equals(successor)){
+                        if(openlist.get(key).getX() == successor.getX() && openlist.get(key).getY() == successor.getY()){
                             openlist.remove(key);
+                            break;
                         }
                     }
                 }catch (Exception e){

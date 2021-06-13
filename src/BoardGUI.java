@@ -164,7 +164,8 @@ public class BoardGUI extends JPanel implements ActionListener{
                 }
                 g.fillRect(w*cellSize, h*cellSize, cellSize, cellSize);
                 g.setColor(Color.BLACK);
-                g.drawString(w + "|" + h , w*cellSize, (h*cellSize)+cellSize);
+                //g.drawString(w + "|" + h , w*cellSize, (h*cellSize)+cellSize);
+                g.drawString(""+board[w][h].getCost() , w*cellSize, (h*cellSize)+cellSize);
                 g.drawRect(w*cellSize, h*cellSize, cellSize, cellSize);
             }
         }
