@@ -50,7 +50,7 @@ public class A_Stern implements Runnable{
             }
 
             try {
-                Thread.sleep(500);               //Thread wartet auf vorherige Operationen, um Fehler zu vermeiden
+                Thread.sleep(200);               //Thread wartet auf vorherige Operationen, um Fehler zu vermeiden
             } catch (Exception e) {
 
             }
@@ -91,9 +91,9 @@ public class A_Stern implements Runnable{
             System.out.println(successor.getEuclidDist());
              */
 
-            double cost = currentNode.getCost() + successor.getEuclidDist();
+            double cost = currentNode.getCostFromStart() + successor.getCost();
 
-            if(openlist.containsValue(successor) && cost >= (currentNode.getCost() + currentNode.getEuclidDist())){     //Wenn der Nachbarknoten in der Liste höhere Kosten als der zu betrachtende Knoten,
+            if(openlist.containsValue(successor) && cost >= (successor.getCostFromStart())){     //Wenn der Nachbarknoten in der Liste höhere Kosten als der zu betrachtende Knoten,
                 continue;                                                                                               //dann wird dieser nicht weiter betrachtet.
             }
 
@@ -101,18 +101,18 @@ public class A_Stern implements Runnable{
                 //Prüfe ob lastNode bei successor schon gesetzt wurde und ob er weiter entfernt zum Ziel ist als vom currentNode
                 if(successor.isLastNodeSet()){
                     Node lastNode = gui.getBoard()[currentNode.getLastX()][currentNode.getLastY()];
-                    if(lastNode.getEuclidDist() > cost){
+                    if(lastNode.getEuclidDist() > successor.getEuclidDist()){
                         successor.setLastNode(currentNode.getX(), currentNode.getY());          // Speichert den letzten Schritt, damit wir den Gesamtweg am Ende anzeigen können (ff.)
-                        successor.setCost(cost);
+                        successor.setCostFromStart(cost);
                     }
                 } else {
                     successor.setLastNode(currentNode.getX(), currentNode.getY());          // Speichert den letzten Schritt, damit wir den Gesamtweg am Ende anzeigen können (ff.)
-                    successor.setCost(cost);
+                    successor.setCostFromStart(cost);
                 }
 
             }else {
                 successor.setLastNode(currentNode.getX(), currentNode.getY());          // Speichert den letzten Schritt, damit wir den Gesamtweg am Ende anzeigen können (ff.)
-                successor.setCost(cost);
+                successor.setCostFromStart(cost);
             }
 
 
@@ -130,7 +130,7 @@ public class A_Stern implements Runnable{
                 }
 
             }
-            openlist.put(cost, successor);
+            openlist.put((cost + successor.getEuclidDist()), successor);
         }
     }
 

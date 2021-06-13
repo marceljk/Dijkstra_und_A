@@ -10,9 +10,8 @@ public class Node {
     private int lastY;
     private boolean lastNodeSet = false;
     private double distanz = 0;
-    private double cost = 0;
-    private static int finishx;
-    private static int finishy;
+    private double cost;
+    private double costFromStart;
     private BoardGUI gui;
 
     public Node(int type, int x, int y) {
@@ -27,8 +26,8 @@ public class Node {
      * @return
      */
     public double getEuclidDist() {
-        int xdif = Math.abs(x - finishx);
-        int ydif = Math.abs(y - finishy);
+        int xdif = Math.abs(x - getFinishx());
+        int ydif = Math.abs(y - getFinishy());
         distanz = Math.sqrt((xdif * xdif) + (ydif * ydif));
         return distanz;
     }
@@ -80,7 +79,7 @@ public class Node {
         return lastY;
     }
 
-    // 0 = leer, 1 = wand, 2 = start, 3 = ende, 4 = untersucht, 5 = weg
+    // 0 = leer, 1 = wand, 2 = start, 3 = ende, 4 = untersucht, 5 = weg, 6 = wasser, 7 = wüste, 8 = busch
     public int getType() {
         return cellType;
     }
@@ -91,25 +90,33 @@ public class Node {
     }
 
     public double getCost(){
-        return cost;
+        switch (getType()) {
+            case 0:
+                return 1;
+            case 1:
+                return Double.MAX_VALUE;
+            case 6:
+                return Double.MAX_VALUE;
+            case 7:
+                return 10;
+            case 8:
+                return 5;
+            default:
+                return 1;
+        }
     }
 
-    public void setCost(double cost){
-        this.cost = cost;
-    }
 
     public void setGui(BoardGUI gui) {
         this.gui = gui;
     }
 
-    public static int getFinishx() {
-        finishx = BoardGUI.getFinishx();
-        return finishx;
+    public int getFinishx() {
+        return gui.getFinishx();
     }
 
-    public static int getFinishy() {
-        finishy = BoardGUI.getFinishy();
-        return finishy;
+    public int getFinishy() {
+        return gui.getFinishy();
     }
 
     // 0 = leer, 1 = wand, 2 = start, 3 = ende, 4 = untersucht, 5 = weg
@@ -125,6 +132,14 @@ public class Node {
 
     public boolean isLastNodeSet() {
         return lastNodeSet;
+    }
+
+    public double getCostFromStart() {
+        return costFromStart;
+    }
+
+    public void setCostFromStart(double costFromStart) {
+        this.costFromStart = costFromStart;
     }
 
     //TODO: Anzahl der Schritte die gelaufen werden müssen

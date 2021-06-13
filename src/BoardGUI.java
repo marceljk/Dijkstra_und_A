@@ -52,7 +52,7 @@ public class BoardGUI extends JPanel implements ActionListener{
                 board[x][y].setGui(this);
             }
         }
-        randomWall();
+        //randomWall();
     }
 
     private void randomWall(){
@@ -122,6 +122,28 @@ public class BoardGUI extends JPanel implements ActionListener{
         }
     }
 
+    public void beispiel2AStern() {
+        allWhite();
+        // U Form
+        for (int j = 5; j <= 10; j++) {
+            if(!(board[4][j].getType() == 1)){
+                board[4][j].setType(1);
+            }
+        }
+        for (int j = 5; j <= 10; j++) {
+            if(!(board[11][j].getType() == 1)){
+                board[11][j].setType(1);
+            }
+        }
+        for (int j = 4; j <= 10; j++) {
+            if(!(board[j][10].getType() == 1)){
+                board[j][10].setType(1);
+            }
+        }
+        board[6][10].setType(6);
+
+    }
+
     public void allWhite() {
         int amountCellRow = ((widthX +height)/2)/cellSize;
         for (int i = 0; i < amountCellRow; i++) {
@@ -143,7 +165,7 @@ public class BoardGUI extends JPanel implements ActionListener{
         super.paintComponent(g);
         for (int w = 0; w < board.length;w++) {
             for (int h = 0; h < board[w].length; h++) {
-                // 0 = leer, 1 = wand, 2 = start, 3 = ende
+                // 0 = leer, 1 = wand, 2 = start, 3 = ende, 4 = untersucht, 5 = weg, 6 = wasser, 7 = wüste, 8 = busch
                 if(board[w][h].getType() == 0) {
                     g.setColor(Color.WHITE);
                 }
@@ -162,10 +184,19 @@ public class BoardGUI extends JPanel implements ActionListener{
                 if(board[w][h].getType() == 5) {
                     g.setColor(Color.YELLOW);
                 }
+                if(board[w][h].getType() == 6) {
+                    g.setColor(Color.BLUE);
+                }
+                if(board[w][h].getType() == 7) {
+                    g.setColor(Color.orange);
+                }
+                if(board[w][h].getType() == 8) {
+                    g.setColor(Color.YELLOW);
+                }
                 g.fillRect(w*cellSize, h*cellSize, cellSize, cellSize);
                 g.setColor(Color.BLACK);
                 //g.drawString(w + "|" + h , w*cellSize, (h*cellSize)+cellSize);
-                g.drawString(""+board[w][h].getCost() , w*cellSize, (h*cellSize)+cellSize);
+                g.drawString(""+(int) board[w][h].getCostFromStart() +"|"+ (int) board[w][h].getEuclidDist() , w*cellSize, (h*cellSize)+cellSize);
                 g.drawRect(w*cellSize, h*cellSize, cellSize, cellSize);
             }
         }

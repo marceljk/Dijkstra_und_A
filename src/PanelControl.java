@@ -1,4 +1,6 @@
 
+import com.sun.tools.javac.Main;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -7,10 +9,11 @@ public class PanelControl extends JPanel {
     private JButton start = new JButton("Starte");
     private JButton reset = new JButton("Zurücksetzen");
     private JButton b1Astern = new JButton("Beispiel 1 A*");
+    private JButton b2Astern = new JButton("Beispiel 2 A*");
 
 
 
-    private String[] algorithms = {"Dijkstra", "A*"};
+    private String[] algorithms = {"A*", "Dijkstra"};
 
     private JComboBox algorithm = new JComboBox(algorithms);
 
@@ -35,6 +38,10 @@ public class PanelControl extends JPanel {
         gbc.gridy = 3;
         this.add(b1Astern,gbc);
 
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        this.add(b2Astern,gbc);
+
         reset.addActionListener(e -> {
             MainView.resetBoard();
         });
@@ -42,6 +49,11 @@ public class PanelControl extends JPanel {
         b1Astern.addActionListener(e -> {
             MainView.beispiel1AStern();
         });
+
+        b2Astern.addActionListener(e -> {
+            MainView.beispiel2AStern();
+        });
+
 
         start.addActionListener(e -> {
             //MainView.startAlgorithm();

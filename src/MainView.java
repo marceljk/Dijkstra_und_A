@@ -31,6 +31,10 @@ public class MainView extends JFrame {
         MainView.boardgui.beispiel1AStern();
     }
 
+    public static void beispiel2AStern() {
+        MainView.boardgui.beispiel2AStern();
+    }
+
     public MainView(){
 
         // Layout
