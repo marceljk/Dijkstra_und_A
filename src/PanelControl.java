@@ -34,7 +34,12 @@ public class PanelControl extends JPanel {
 
         start.addActionListener(e -> {
             //MainView.startAlgorithm();
-            MainView.startAStern();
+            if(algorithm.getSelectedItem().equals("A*")) {
+                MainView.startAStern();
+            }
+            else {
+                MainView.startDijkstra();
+            }
         });
 
     }

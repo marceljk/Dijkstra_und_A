@@ -3,8 +3,8 @@
  */
 public class Dijkstra {
 
-    public Dijkstra() {
-
+    public void searchPath() {
+        initialisiere();
     }
 
     private void initialisiere() {

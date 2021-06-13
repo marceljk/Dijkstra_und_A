@@ -7,13 +7,20 @@ public class MainView extends JFrame {
     private PanelControl panelcontrol = new PanelControl();
     private static BoardGUI boardgui = new BoardGUI();
     private static A_Stern aStern = new A_Stern();
+    private static Dijkstra dijkstra = new Dijkstra();
 
     public static void resetBoard() {
         MainView.boardgui.reset();
     }
 
     public static void startAStern() {
+        System.out.println("A* wurde gestartet");
         aStern.searchPath();
+    }
+
+    public static void startDijkstra() {
+        System.out.println("Dijkstra wurde gestartet");
+        dijkstra.searchPath();
     }
 
     public MainView(){
@@ -27,11 +34,9 @@ public class MainView extends JFrame {
         gbc.gridy = 0;
         this.getContentPane().add(panelcontrol, gbc);
 
-
         gbc.gridx = 1;
         gbc.gridy = 0;
         this.getContentPane().add(boardgui, gbc);
-
 
         setResizable(false);
         pack();
