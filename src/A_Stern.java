@@ -1,10 +1,6 @@
 
-import java.awt.event.ActionEvent;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.concurrent.TimeUnit;
 
 public class A_Stern implements Runnable{
 
@@ -16,6 +12,7 @@ public class A_Stern implements Runnable{
     private Node end;
     private boolean debug = true;
     private BoardGUI gui;
+
 
     @Override
     public void run() {
@@ -32,7 +29,6 @@ public class A_Stern implements Runnable{
                 if(gui.getBoard()[x][y].getType() == 4 || gui.getBoard()[x][y].getType() == 5) {
                     gui.getBoard()[x][y].setType(0);
                 }
-
             }
         }
     }
@@ -47,6 +43,7 @@ public class A_Stern implements Runnable{
         Node currentNode;
         end = gui.getFinishNode();
         do {
+
             double min = Double.MAX_VALUE;
             for(Double key: openlist.keySet()){     //Suche Knoten mit niedrigsten Kosten
                 if(min > key){
@@ -65,7 +62,6 @@ public class A_Stern implements Runnable{
             } catch (Exception e) {
 
             }
-
 
             currentNode = openlist.get(min);        //Neuer Knoten wird zum aktuellen Knoten
             openlist.remove(min);
@@ -127,13 +123,9 @@ public class A_Stern implements Runnable{
                 successor.setCostFromStart(cost);
             }
 
-
             if(!(successor.getType() == 3 || successor.getType() == 2 || successor.getType() == 1)){   //Prüft ob der Knoten nicht ein Start-, Zielfeld oder eine Wand ist.
                 successor.setType(4);
             }
-
-
-
 
             if(openlist.containsValue(successor)){
                 try{
@@ -148,6 +140,7 @@ public class A_Stern implements Runnable{
                 }
 
             }
+            successor.setHops(currentNode.getHops()+1);     // Zählt jedesmal um eins hoch.
             openlist.put((cost + successor.getEuclidDist()), successor);
         }
     }
@@ -159,7 +152,9 @@ public class A_Stern implements Runnable{
     private void showPath(Node lastNode){
         int x;
         int y;
-            for (int i = 0; i < 100; i++){
+        Node finalNode = gui.getBoard()[end.getFinishx()][end.getFinishy()];
+        System.out.println(finalNode.getHops());
+            for (int i = 0; i <= finalNode.getHops(); i++){
                 x = lastNode.getLastX();
                 y = lastNode.getLastY();
                 lastNode = gui.getBoard()[x][y];
@@ -169,6 +164,5 @@ public class A_Stern implements Runnable{
                 lastNode.setType(5);
             }
     }
-
 }
 

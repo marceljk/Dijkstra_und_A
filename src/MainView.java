@@ -5,7 +5,9 @@ import java.util.concurrent.TimeUnit;
 
 public class MainView extends JFrame {
 
-    private PanelControl panelcontrol = new PanelControl();
+    private PanelControl panelcontrol;
+    private MainPanelControl mainPanelControl = new MainPanelControl();
+
     private static BoardGUI boardgui = new BoardGUI();
     private static A_Stern aStern = new A_Stern();
     private static Dijkstra dijkstra = new Dijkstra();
@@ -24,7 +26,8 @@ public class MainView extends JFrame {
 
     public static void startDijkstra() {
         System.out.println("Dijkstra wurde gestartet");
-        dijkstra.searchPath(boardgui);
+        dijkstra.setGui(boardgui);
+        dijkstra.searchPath();
     }
 
     public static void beispiel1AStern() {
@@ -45,7 +48,7 @@ public class MainView extends JFrame {
 
         gbc.gridx = 0;
         gbc.gridy = 0;
-        this.getContentPane().add(panelcontrol, gbc);
+        this.getContentPane().add(mainPanelControl, gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 0;
@@ -58,7 +61,10 @@ public class MainView extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
+        panelcontrol = mainPanelControl.getPanelControl();
+
         boardgui.setPanelControl(panelcontrol);
+
     }
 
     public static void main(String[] args)

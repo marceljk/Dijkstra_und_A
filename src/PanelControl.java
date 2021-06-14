@@ -12,14 +12,14 @@ public class PanelControl extends JPanel {
     private JButton b1Astern = new JButton("Beispiel 1 A*");
     private JButton b2Astern = new JButton("Beispiel 2 A*");
 
-    private JTextArea algorithmen = new JTextArea("Algorithmen:");
-    private JTextArea toolboxTXT = new JTextArea("Toolbox:");
-    private JTextArea beispieleTXT = new JTextArea("Beispiele:");
-    private JTextArea leereZeileTXT = new JTextArea("");
+    private JLabel algorithmen = new JLabel("Algorithmen:");
+    private JLabel toolboxTXT = new JLabel("Toolbox:");
+    private JLabel beispieleTXT = new JLabel("Beispiele:");
+    private JLabel leereZeileTXT = new JLabel("");
 
     private String[] algorithms = {"A*", "Dijkstra"};
     private String[] toolboxes = {"Startpunkt", "Ziel", "Wand", "Wasser", "Wüste", "Busch", "Frei"};
-    private String[] beispiele = {"A* U-Form", "A* U-Form mit Hinderniss", "Zufallswände"};
+    private String[] beispiele = {"A* U-Form", "A* U-Form mit Hindernis", "Zufallswände"};
 
     private JComboBox algorithm = new JComboBox(algorithms);
     private JComboBox toolboxJCB = new JComboBox(toolboxes);
@@ -33,6 +33,7 @@ public class PanelControl extends JPanel {
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(1, 1, 1, 1);
         this.setBorder(BorderFactory.createTitledBorder(loweredetched,"Einstellungen"));
+        this.setPreferredSize(new Dimension(180,350));
 
         int breite = 150;
         int hoehe = 25;
@@ -43,14 +44,14 @@ public class PanelControl extends JPanel {
         this.add(start,gbc);
 
         gbc.gridy = 1;
-        this.add(new JTextArea(),gbc);
+        this.add(new JLabel(" "),gbc);
 
         gbc.gridy = 2;
         reset.setPreferredSize(new Dimension(breite,hoehe));
         this.add(reset,gbc);
 
         gbc.gridy = 3;
-        this.add(new JTextArea(),gbc);
+        this.add(new JLabel(" "),gbc);
 
         gbc.gridy = 4;
         this.add(algorithmen,gbc);
@@ -60,7 +61,7 @@ public class PanelControl extends JPanel {
         this.add(algorithm,gbc);
 
         gbc.gridy = 6;
-        this.add(new JTextArea(),gbc);
+        this.add(new JLabel(" "),gbc);
 
         gbc.gridy = 7;
         this.add(toolboxTXT,gbc);
@@ -70,7 +71,7 @@ public class PanelControl extends JPanel {
         this.add(toolboxJCB,gbc);
 
         gbc.gridy = 9;
-        this.add(new JTextArea(),gbc);
+        this.add(new JLabel(  " "),gbc);
 
         gbc.gridy = 10;
         this.add(beispieleTXT,gbc);
@@ -80,7 +81,7 @@ public class PanelControl extends JPanel {
         this.add(beispieleJCB,gbc);
 
         gbc.gridy = 12;
-        this.add(new JTextArea(),gbc);
+        this.add(new JLabel(" "),gbc);
 
         gbc.gridy = 13;
         this.add(b1Astern,gbc);
@@ -105,7 +106,7 @@ public class PanelControl extends JPanel {
         beispieleJCB.addActionListener(e -> {
             if(getSelectedItemBeispiele().equals("A* U-Form")) {
                 MainView.beispiel1AStern();
-            } else if(getSelectedItemBeispiele().equals("A* U-Form mit Hinderniss")) {
+            } else if(getSelectedItemBeispiele().equals("A* U-Form mit Hindernis")) {
                 MainView.beispiel2AStern();
             } else if(getSelectedItemBeispiele().equals("Zufallswände")) {
                 MainView.randomWall();

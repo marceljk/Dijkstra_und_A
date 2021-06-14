@@ -76,7 +76,7 @@ public class BoardGUI extends JPanel implements ActionListener{
         return (onePercent*percent);
     }
 
-    private void setStartFinal(int x, int y){
+    private void setType(int x, int y){
         /*
         if(clickCounter == 1) {
             board[x][y].setType(2);
@@ -279,14 +279,14 @@ public class BoardGUI extends JPanel implements ActionListener{
         return height;
     }
 
-    private class MouseListener2 implements MouseListener{
+    private class MouseListener2 implements MouseListener, MouseMotionListener{
 
         @Override
         public void mouseClicked(MouseEvent e) {
             try {
                 int x = e.getX();
                 int y = e.getY();
-                setStartFinal(x/cellSize,y/cellSize);
+                setType(x/cellSize,y/cellSize);
             } catch(Exception z) {
                 System.err.println(z);
             }
@@ -309,6 +309,22 @@ public class BoardGUI extends JPanel implements ActionListener{
 
         @Override
         public void mouseExited(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseDragged(MouseEvent e) {
+            try {
+                int x = e.getX();
+                int y = e.getY();
+                setType(x/cellSize,y/cellSize);
+            } catch(Exception z) {
+                System.err.println(z);
+            }
+        }
+
+        @Override
+        public void mouseMoved(MouseEvent e) {
 
         }
     }
