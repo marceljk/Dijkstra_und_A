@@ -283,6 +283,11 @@ public class BoardGUI extends JPanel implements ActionListener{
 
         @Override
         public void mouseClicked(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
             try {
                 int x = e.getX();
                 int y = e.getY();
@@ -290,21 +295,14 @@ public class BoardGUI extends JPanel implements ActionListener{
             } catch(Exception z) {
                 System.err.println(z);
             }
-
-        }
-
-        @Override
-        public void mousePressed(MouseEvent e) {
         }
 
         @Override
         public void mouseReleased(MouseEvent e) {
-
         }
 
         @Override
         public void mouseEntered(MouseEvent e) {
-
         }
 
         @Override
@@ -314,18 +312,10 @@ public class BoardGUI extends JPanel implements ActionListener{
 
         @Override
         public void mouseDragged(MouseEvent e) {
-            try {
-                int x = e.getX();
-                int y = e.getY();
-                setType(x/cellSize,y/cellSize);
-            } catch(Exception z) {
-                System.err.println(z);
-            }
         }
 
         @Override
         public void mouseMoved(MouseEvent e) {
-
         }
     }
 }

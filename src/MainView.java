@@ -21,7 +21,6 @@ public class MainView extends JFrame {
         aStern.setGui(boardgui);
         Thread x = new Thread(aStern);
         x.start();
-        //aStern.searchPath();
     }
 
     public static void startDijkstra() {
