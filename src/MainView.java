@@ -56,6 +56,8 @@ public class MainView extends JFrame {
         setTitle("Board");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+
+        boardgui.setPanelControl(panelcontrol);
     }
 
     public static void main(String[] args)

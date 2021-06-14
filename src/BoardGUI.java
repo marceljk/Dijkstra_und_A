@@ -93,16 +93,33 @@ public class BoardGUI extends JPanel implements ActionListener{
          */
 
         if(panelControl.getSelectedItemToolBox().equals("Startpunkt")) {
+            isSetStartFinal(2);
             board[x][y].setType(2);
             startx = x;
             starty = y;
         } else if(panelControl.getSelectedItemToolBox().equals("Ziel")){
+            isSetStartFinal(3);
             board[x][y].setType(3);
             finishx = x;
             finishy = y;
         } else if(panelControl.getSelectedItemToolBox() == null){
             System.out.println("Probelm ist aufgetreten");
         }
+    }
+
+    private void isSetStartFinal(int type){
+        for(int x = 0; x < (widthX /cellSize) ; x++){
+            for(int y = 0; y < (height/cellSize) ; y++){
+                if(board[x][y].getType() == type){
+                    board[x][y].setType(0);
+                    break;
+                };
+            }
+        }
+    }
+
+    public void setPanelControl(PanelControl panelControl) {
+        this.panelControl = panelControl;
     }
 
     /**
