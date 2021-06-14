@@ -94,7 +94,7 @@ public class Node {
     private void setCost(){
         switch (getType()) {
             case 0:
-                cost = 0;
+                cost = 1;
                 break;
             case 1:
                 cost = Double.MAX_VALUE;
@@ -111,7 +111,7 @@ public class Node {
                 cost = 5;
                 break;
             default:
-                cost = 0;
+                cost = 1;
                 break;
         }
 

@@ -26,11 +26,22 @@ public class A_Stern implements Runnable{
         this.gui = gui;
     }
 
+    public void clearSearched(){
+        for(int x = 0; x < gui.getBoard().length ; x++){
+            for(int y = 0; y < gui.getBoard()[x].length ; y++){
+                if(gui.getBoard()[x][y].getType() == 4 || gui.getBoard()[x][y].getType() == 5) {
+                    gui.getBoard()[x][y].setType(0);
+                }
+
+            }
+        }
+    }
 
     public void searchPath(){
+        clearSearched();
         openlist = new HashMap<>();
         closedList = new ArrayList<>();
-        openlist.put(0.0, gui.getBoard()[BoardGUI.getStartx()][BoardGUI.getStarty()]);
+        openlist.put(0.0, gui.getBoard()[gui.getStartx()][gui.getStarty()]);
 
         search = true;
         Node currentNode;
@@ -50,7 +61,7 @@ public class A_Stern implements Runnable{
             }
 
             try {
-                Thread.sleep(200);               //Thread wartet auf vorherige Operationen, um Fehler zu vermeiden
+                Thread.sleep(50);               //Thread wartet auf vorherige Operationen, um Fehler zu vermeiden
             } catch (Exception e) {
 
             }

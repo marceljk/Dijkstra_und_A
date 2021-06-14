@@ -18,7 +18,7 @@ public class PanelControl extends JPanel {
     private JTextArea leereZeileTXT = new JTextArea("");
 
     private String[] algorithms = {"A*", "Dijkstra"};
-    private String[] toolboxes = {"Startpunkt", "Ziel", "Wand", "Wasser", "Wüste", "Busch"};
+    private String[] toolboxes = {"Startpunkt", "Ziel", "Wand", "Wasser", "Wüste", "Busch", "Frei"};
     private String[] beispiele = {"A* U-Form", "A* U-Form mit Hinderniss", "Zufallswände"};
 
     private JComboBox algorithm = new JComboBox(algorithms);

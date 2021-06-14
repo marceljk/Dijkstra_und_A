@@ -110,7 +110,9 @@ public class BoardGUI extends JPanel implements ActionListener{
             board[x][y].setType(7);
         }else if(panelControl.getSelectedItemToolBox().equals("Busch")){
             board[x][y].setType(8);
-        } else if(panelControl.getSelectedItemToolBox() == null){
+        }else if(panelControl.getSelectedItemToolBox().equals("Frei")) {
+            board[x][y].setType(0);
+        }else if(panelControl.getSelectedItemToolBox() == null){
             System.out.println("Probelm ist aufgetreten");
         }
     }
