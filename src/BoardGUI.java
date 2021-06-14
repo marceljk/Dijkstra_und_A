@@ -261,7 +261,7 @@ public class BoardGUI extends JPanel implements ActionListener{
         return finishy;
     }
 
-    public Node getFinishNode(){return board[finishx][finishy];}
+    public Node getFinalNode(){return board[finishx][finishy];}
 
     public Node[][] getBoard() {
         return board;

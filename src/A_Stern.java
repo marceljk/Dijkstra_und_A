@@ -41,7 +41,7 @@ public class A_Stern implements Runnable{
 
         search = true;
         Node currentNode;
-        end = gui.getFinishNode();
+        end = gui.getFinalNode();
         do {
 
             double min = Double.MAX_VALUE;

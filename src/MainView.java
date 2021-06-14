@@ -27,7 +27,8 @@ public class MainView extends JFrame {
     public static void startDijkstra() {
         System.out.println("Dijkstra wurde gestartet");
         dijkstra.setGui(boardgui);
-        dijkstra.searchPath();
+        Thread x = new Thread(dijkstra);
+        x.start();
     }
 
     public static void beispiel1AStern() {

@@ -4,11 +4,16 @@ import java.util.HashMap;
 /**
  *
  */
-public class Dijkstra {
+public class Dijkstra implements Runnable{
     private BoardGUI gui;
     private ArrayList<Node> q;
     private HashMap<Node, Double> abstand;
     private HashMap<Node, Node> vorgänger;
+
+    @Override
+    public void run() {
+        searchPath();
+    }
 
     public void setGui(BoardGUI gui){
         this.gui = gui;
@@ -26,20 +31,39 @@ public class Dijkstra {
         return current;
     }
 
-    public HashMap<Node, Node> searchPath() {
+    public void searchPath() {
         initialisiere();
 
-        while (!q.isEmpty()) {
+        boolean search = true;
+
+        while (!q.isEmpty() && search) {
             Node u = getMinDistNode();
             q.remove(u);
 
+            try {
+                Thread.sleep(50);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
             for(Node successor: u.getSuccessor()) {
+
+                if(!(successor.getType() == 3 || successor.getType() == 2 || successor.getType() == 1)){   //Prüft ob der Knoten nicht ein Start-, Zielfeld oder eine Wand ist.
+                    successor.setType(4);
+                }
+
                 if(q.contains(successor)) {
                     distanz_update(u, successor);
                 }
+
+                if(successor.equals(gui.getFinalNode())){
+                    search = false;
+                    break;
+                }
             }
         }
-        return vorgänger;
+
+        erstelleKuerzestenPfad();
     }
 
     private void initialisiere() {
@@ -70,6 +94,18 @@ public class Dijkstra {
     }
 
     private void erstelleKuerzestenPfad() {
-
+        ArrayList<Node> path = new ArrayList<>();
+        Node finalNode = gui.getFinalNode();
+        path.add(finalNode);
+        while (vorgänger.get(finalNode) != null) {
+            finalNode = vorgänger.get(finalNode);
+            path.add(finalNode);
+        }
+        for(Node node:path) {
+            if( !( node.equals(gui.getBoard()[gui.getStartx()][gui.getStarty()]) || node.equals(gui.getFinalNode()) ) ){
+                node.setType(5);
+            }
+        }
     }
+
 }
