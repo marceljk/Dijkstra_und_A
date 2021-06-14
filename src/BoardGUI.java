@@ -17,6 +17,8 @@ public class BoardGUI extends JPanel implements ActionListener{
     private static int startx;
     private static int starty;
 
+    private PanelControl panelControl;
+
     public BoardGUI(){
         setPreferredSize(new Dimension(widthX, height));
         setBackground(Color.WHITE);
@@ -75,6 +77,7 @@ public class BoardGUI extends JPanel implements ActionListener{
     }
 
     private void setStartFinal(int x, int y){
+        /*
         if(clickCounter == 1) {
             board[x][y].setType(2);
             startx = x;
@@ -86,6 +89,19 @@ public class BoardGUI extends JPanel implements ActionListener{
             finishx = x;
             finishy = y;
             clickCounter ++;
+        }
+         */
+
+        if(panelControl.getSelectedItemToolBox().equals("Startpunkt")) {
+            board[x][y].setType(2);
+            startx = x;
+            starty = y;
+        } else if(panelControl.getSelectedItemToolBox().equals("Ziel")){
+            board[x][y].setType(3);
+            finishx = x;
+            finishy = y;
+        } else if(panelControl.getSelectedItemToolBox() == null){
+            System.out.println("Probelm ist aufgetreten");
         }
     }
 
