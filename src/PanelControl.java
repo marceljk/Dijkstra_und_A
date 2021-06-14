@@ -92,6 +92,7 @@ public class PanelControl extends JPanel {
             MainView.resetBoard();
         });
 
+        /*
         b1Astern.addActionListener(e -> {
             MainView.beispiel1AStern();
         });
@@ -99,7 +100,15 @@ public class PanelControl extends JPanel {
         b2Astern.addActionListener(e -> {
             MainView.beispiel2AStern();
         });
+         */
 
+        beispieleJCB.addActionListener(e -> {
+            if(getSelectedItemBeispiele().equals("A* U-Form")) {
+                MainView.beispiel1AStern();
+            } else if(getSelectedItemBeispiele().equals("A* U-Form mit Hinderniss")) {
+                MainView.beispiel2AStern();
+            }
+        });
 
         start.addActionListener(e -> {
             //MainView.startAlgorithm();
@@ -119,6 +128,10 @@ public class PanelControl extends JPanel {
 
     public Object getSelectedItemToolBox() {
         return toolboxJCB.getSelectedItem();
+    }
+
+    private Object getSelectedItemBeispiele() {
+        return beispieleJCB.getSelectedItem();
     }
 
 }
