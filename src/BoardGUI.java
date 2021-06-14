@@ -52,7 +52,7 @@ public class BoardGUI extends JPanel implements ActionListener{
                 board[x][y].setGui(this);
             }
         }
-        //randomWall();
+        randomWall();
     }
 
     private void randomWall(){
