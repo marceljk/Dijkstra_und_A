@@ -102,6 +102,14 @@ public class BoardGUI extends JPanel implements ActionListener{
             board[x][y].setType(3);
             finishx = x;
             finishy = y;
+        } else if(panelControl.getSelectedItemToolBox().equals("Wand")) {
+            board[x][y].setType(1);
+        }else if(panelControl.getSelectedItemToolBox().equals("Wasser")) {
+            board[x][y].setType(6);
+        }else if(panelControl.getSelectedItemToolBox().equals("Wüste")) {
+            board[x][y].setType(7);
+        }else if(panelControl.getSelectedItemToolBox().equals("Busch")){
+            board[x][y].setType(8);
         } else if(panelControl.getSelectedItemToolBox() == null){
             System.out.println("Probelm ist aufgetreten");
         }
@@ -224,7 +232,7 @@ public class BoardGUI extends JPanel implements ActionListener{
                     g.setColor(Color.orange);
                 }
                 if(board[w][h].getType() == 8) {
-                    g.setColor(Color.YELLOW);
+                    g.setColor(Color.green);
                 }
                 g.fillRect(w*cellSize, h*cellSize, cellSize, cellSize);
                 g.setColor(Color.BLACK);
