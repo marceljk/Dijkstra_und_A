@@ -28,12 +28,13 @@ public class MainView extends JFrame {
     }
 
     public static void beispiel1AStern() {
-        MainView.boardgui.beispiel1AStern();
+        boardgui.beispiel1AStern();
     }
 
-    public static void beispiel2AStern() {
-        MainView.boardgui.beispiel2AStern();
+    public static void beispiel2AStern() {boardgui.beispiel2AStern();
     }
+
+    public static void randomWall(){ boardgui.randomWall();}
 
     public MainView(){
 

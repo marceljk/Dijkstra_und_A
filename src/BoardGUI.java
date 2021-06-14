@@ -54,13 +54,13 @@ public class BoardGUI extends JPanel implements ActionListener{
                 board[x][y].setGui(this);
             }
         }
-        randomWall();
     }
 
-    private void randomWall(){
+    public void randomWall(){
+        reset();
         int i = 0;
         int amountCellRow = ((widthX +height)/2)/cellSize;
-        while (i < (amountCellRow*percentWall(55)) ){
+        while (i < (amountCellRow*percentWall(50)) ){
             int w = (int) (Math.random()*amountCellRow);
             int h = (int) (Math.random()*amountCellRow);
             if(!(board[w][h].getType() == 1)){

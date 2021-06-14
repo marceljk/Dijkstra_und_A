@@ -102,7 +102,7 @@ public class Node {
             case 4:
                 break;
             case 6:
-                cost = 2000;
+                cost = 2;
                 break;
             case 7:
                 cost = 10;
