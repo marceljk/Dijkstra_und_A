@@ -80,28 +80,9 @@ public class PanelControl extends JPanel {
         beispieleJCB.setPreferredSize(new Dimension(breite,hoehe));
         this.add(beispieleJCB,gbc);
 
-        gbc.gridy = 12;
-        this.add(new JLabel(" "),gbc);
-
-        gbc.gridy = 13;
-        this.add(b1Astern,gbc);
-
-        gbc.gridy = 14;
-        this.add(b2Astern,gbc);
-
         reset.addActionListener(e -> {
             MainView.resetBoard();
         });
-
-        /*
-        b1Astern.addActionListener(e -> {
-            MainView.beispiel1AStern();
-        });
-
-        b2Astern.addActionListener(e -> {
-            MainView.beispiel2AStern();
-        });
-         */
 
         beispieleJCB.addActionListener(e -> {
             if(getSelectedItemBeispiele().equals("A* U-Form")) {
@@ -114,7 +95,6 @@ public class PanelControl extends JPanel {
         });
 
         start.addActionListener(e -> {
-            //MainView.startAlgorithm();
             if(getSelectedItemAlgorithm().equals("A*")) {
                 MainView.startAStern();
             }
