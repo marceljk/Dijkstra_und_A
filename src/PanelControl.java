@@ -1,6 +1,8 @@
 
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.EtchedBorder;
 import java.awt.*;
 
 public class PanelControl extends JPanel {
@@ -10,35 +12,80 @@ public class PanelControl extends JPanel {
     private JButton b1Astern = new JButton("Beispiel 1 A*");
     private JButton b2Astern = new JButton("Beispiel 2 A*");
 
-
+    private JTextArea algorithmen = new JTextArea("Algorithmen:");
+    private JTextArea toolboxTXT = new JTextArea("Toolbox:");
+    private JTextArea beispieleTXT = new JTextArea("Beispiele:");
+    private JTextArea leereZeileTXT = new JTextArea("");
 
     private String[] algorithms = {"A*", "Dijkstra"};
+    private String[] toolboxes = {"Startpunkt", "Ziel", "Wand", "Wasser", "Wüste", "Busch"};
+    private String[] beispiele = {"A* U-Form", "A* U-Form mit Hinderniss"};
 
     private JComboBox algorithm = new JComboBox(algorithms);
+    private JComboBox toolboxJCB = new JComboBox(toolboxes);
+    private JComboBox beispieleJCB = new JComboBox(beispiele);
+
+    //BORDER
+    Border loweredetched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
 
     public PanelControl() {
         this.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(1, 1, 1, 1);
+        this.setBorder(BorderFactory.createTitledBorder(loweredetched,"Einstellungen"));
+
+        int breite = 150;
+        int hoehe = 25;
 
         gbc.gridx = 0;
         gbc.gridy = 0;
+        start.setPreferredSize(new Dimension(breite,hoehe));
         this.add(start,gbc);
 
-        gbc.gridx = 0;
         gbc.gridy = 1;
+        this.add(new JTextArea(),gbc);
+
+        gbc.gridy = 2;
+        reset.setPreferredSize(new Dimension(breite,hoehe));
         this.add(reset,gbc);
 
-        gbc.gridx = 0;
-        gbc.gridy = 2;
+        gbc.gridy = 3;
+        this.add(new JTextArea(),gbc);
+
+        gbc.gridy = 4;
+        this.add(algorithmen,gbc);
+
+        gbc.gridy = 5;
+        algorithm.setPreferredSize(new Dimension(breite,hoehe));
         this.add(algorithm,gbc);
 
-        gbc.gridx = 0;
-        gbc.gridy = 3;
+        gbc.gridy = 6;
+        this.add(new JTextArea(),gbc);
+
+        gbc.gridy = 7;
+        this.add(toolboxTXT,gbc);
+
+        gbc.gridy = 8;
+        toolboxJCB.setPreferredSize(new Dimension(breite,hoehe));
+        this.add(toolboxJCB,gbc);
+
+        gbc.gridy = 9;
+        this.add(new JTextArea(),gbc);
+
+        gbc.gridy = 10;
+        this.add(beispieleTXT,gbc);
+
+        gbc.gridy = 11;
+        beispieleJCB.setPreferredSize(new Dimension(breite,hoehe));
+        this.add(beispieleJCB,gbc);
+
+        gbc.gridy = 12;
+        this.add(new JTextArea(),gbc);
+
+        gbc.gridy = 13;
         this.add(b1Astern,gbc);
 
-        gbc.gridx = 0;
-        gbc.gridy = 4;
+        gbc.gridy = 14;
         this.add(b2Astern,gbc);
 
         reset.addActionListener(e -> {
@@ -56,7 +103,7 @@ public class PanelControl extends JPanel {
 
         start.addActionListener(e -> {
             //MainView.startAlgorithm();
-            if(algorithm.getSelectedItem().equals("A*")) {
+            if(getSelectedItemAlgorithm().equals("A*")) {
                 MainView.startAStern();
             }
             else {
@@ -66,8 +113,12 @@ public class PanelControl extends JPanel {
 
     }
 
+    private Object getSelectedItemAlgorithm() {
+        return algorithm.getSelectedItem();
+    }
 
-
-
+    public Object getSelectedItemToolBox() {
+        return toolboxJCB.getSelectedItem();
+    }
 
 }
