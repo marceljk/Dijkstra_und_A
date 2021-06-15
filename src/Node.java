@@ -13,13 +13,15 @@ public class Node {
     private double cost;
     private double costFromStart;
     private BoardGUI gui;
+    private boolean isDiagonal;
 
     public Node(int type, int x, int y) {
         cellType = type;
         this.x = x;
         this.y = y;
         hops = -1;
-        setCost();
+        calcCost();
+        isDiagonal = false;
     }
 
     /**
@@ -49,6 +51,11 @@ public class Node {
                 if(randX >= 0 && randY >= 0 && randX < (gui.getWidthX()/cellsize) && randY < (gui.getHeightY()/cellsize)){
                     if(xtemp == 0 && ytemp == 0){           //Prüft, ob man den Ürsprungsknoten betrachtet.
                         continue;
+                    }
+                    if(xtemp == 0 || ytemp == 0) {
+                        gui.getBoard()[x+xtemp][y+ytemp].setDiagonal(false);
+                    } else {
+                        gui.getBoard()[x+xtemp][y+ytemp].setDiagonal(true);
                     }
                     temp = gui.getBoard()[x+xtemp][y+ytemp];
                     if(temp.getType() != 1){                //Prüft ob der Knoten nicht eine Wand ist.
@@ -88,13 +95,17 @@ public class Node {
     }
 
     public double getCost(){
+        calcCost();
         return cost;
     }
 
-    private void setCost(){
+    private void calcCost(){
         switch (getType()) {
             case 0:
                 cost = 1;
+                if(isDiagonal) {
+                    cost *= 3;
+                }
                 break;
             case 1:
                 cost = Double.MAX_VALUE;
@@ -102,19 +113,27 @@ public class Node {
             case 4:
                 break;
             case 6:
-                cost = 5;
+                cost = 15;
+                if(isDiagonal) {
+                    cost *= 3;
+                }
                 break;
             case 7:
                 cost = 10;
+                if(isDiagonal) {
+                    cost *= 3;
+                }
                 break;
             case 8:
                 cost = 5;
+                if(isDiagonal) {
+                    cost *= 3;
+                }
                 break;
             default:
                 cost = 1;
                 break;
         }
-
 
     }
 
@@ -133,7 +152,7 @@ public class Node {
     // 0 = leer, 1 = wand, 2 = start, 3 = ende, 4 = untersucht, 5 = weg
     public void setType(int type) {
         cellType = type;
-        setCost();
+        calcCost();
     }
 
     public void setLastNode(int x, int y) {
@@ -148,6 +167,10 @@ public class Node {
 
     public double getCostFromStart() {
         return costFromStart;
+    }
+
+    public void setDiagonal(boolean diagonal) {
+        isDiagonal = diagonal;
     }
 
     public void setCostFromStart(double costFromStart) {

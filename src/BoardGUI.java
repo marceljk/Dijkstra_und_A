@@ -76,6 +76,16 @@ public class BoardGUI extends JPanel implements ActionListener{
         return (onePercent*percent);
     }
 
+    public void clearSearched(){
+        for(int x = 0; x < getBoard().length ; x++){
+            for(int y = 0; y < getBoard()[x].length ; y++){
+                if(getBoard()[x][y].getType() == 4 || getBoard()[x][y].getType() == 5) {
+                    getBoard()[x][y].setType(0);
+                }
+            }
+        }
+    }
+
     private void setType(int x, int y){
         /*
         if(clickCounter == 1) {

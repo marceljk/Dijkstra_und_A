@@ -19,7 +19,8 @@ public class Dijkstra implements Runnable{
         this.gui = gui;
     }
 
-    private Node getMinDistNode() {double min = Double.MAX_VALUE;
+    private Node getMinDistNode() {
+        double min = Double.MAX_VALUE;
         Node current = null;
         for(Node c: q){                                 //Suche Knoten mit niedrigsten Kosten
             double d = abstand.get(c);
@@ -32,6 +33,7 @@ public class Dijkstra implements Runnable{
     }
 
     public void searchPath() {
+        gui.clearSearched();
         initialisiere();
 
         boolean search = true;

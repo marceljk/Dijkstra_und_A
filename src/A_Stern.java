@@ -23,18 +23,8 @@ public class A_Stern implements Runnable{
         this.gui = gui;
     }
 
-    public void clearSearched(){
-        for(int x = 0; x < gui.getBoard().length ; x++){
-            for(int y = 0; y < gui.getBoard()[x].length ; y++){
-                if(gui.getBoard()[x][y].getType() == 4 || gui.getBoard()[x][y].getType() == 5) {
-                    gui.getBoard()[x][y].setType(0);
-                }
-            }
-        }
-    }
-
     public void searchPath(){
-        clearSearched();
+        gui.clearSearched();
         openlist = new HashMap<>();
         closedList = new ArrayList<>();
         openlist.put(0.0, gui.getBoard()[gui.getStartx()][gui.getStarty()]);
