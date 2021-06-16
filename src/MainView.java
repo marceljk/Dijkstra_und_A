@@ -5,9 +5,9 @@ import java.util.concurrent.TimeUnit;
 
 public class MainView extends JFrame {
 
+    private static PanelControl panelcontrol;
     private MainPanelControl mainPanelControl = new MainPanelControl();
 
-    private static PanelControl panelcontrol;
     private static BoardGUI boardgui = new BoardGUI();
     private static A_Stern aStern = new A_Stern();
     private static Dijkstra dijkstra = new Dijkstra();
@@ -20,8 +20,8 @@ public class MainView extends JFrame {
         System.out.println("A* wurde gestartet");
         aStern = new A_Stern();
         //clearNodeInfos();
-        aStern.setGui(boardgui);
         aStern.setPanelControl(panelcontrol);
+        aStern.setGui(boardgui);
         Thread x = new Thread(aStern);
         x.start();
     }
@@ -50,12 +50,7 @@ public class MainView extends JFrame {
         boardgui.beispiel1AStern();
     }
 
-    public static void beispiel2AStern() {
-        boardgui.beispiel2AStern();
-    }
-
-    public static void aSternFalle() {
-        boardgui.aSternfalle();
+    public static void beispiel2AStern() {boardgui.beispiel2AStern();
     }
 
     public static void randomWall(){ boardgui.randomWall();}

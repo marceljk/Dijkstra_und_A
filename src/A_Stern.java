@@ -7,7 +7,7 @@ public class A_Stern implements Runnable{
     private PanelControl pc;
 
     private Node node;
-    private HashMap<Double, Node> openlist;
+    private HashMap<Node, Double> openlist;
     private ArrayList<Node> closedList;
     private ArrayList<Node> sortList;
     private boolean search;
@@ -26,8 +26,8 @@ public class A_Stern implements Runnable{
         this.gui = gui;
     }
 
-    public void setPanelControl(PanelControl pc) {
-        this.pc = pc;
+    public void setPanelControl(PanelControl panelControl) {
+        this.pc = panelControl;
     }
 
     public void searchPath(){
@@ -35,17 +35,18 @@ public class A_Stern implements Runnable{
         gui.clearSearched();
         openlist = new HashMap<>();
         closedList = new ArrayList<>();
-        openlist.put(0.0, gui.getBoard()[gui.getStartx()][gui.getStarty()]);
+        openlist.put(gui.getBoard()[gui.getStartx()][gui.getStarty()], 0.0);
 
         search = true;
-        Node currentNode;
+        Node currentNode = null;
         end = gui.getFinalNode();
         do {
 
             double min = Double.MAX_VALUE;
-            for(Double key: openlist.keySet()){     //Suche Knoten mit niedrigsten Kosten
-                if(min > key){
-                    min = key;
+            for(Node key: openlist.keySet()){     //Suche Knoten mit niedrigsten Kosten
+                if(min > openlist.get(key)){
+                    min = openlist.get(key);
+                    currentNode = key;
                 }
             }
 
@@ -56,13 +57,13 @@ public class A_Stern implements Runnable{
             }
 
             try {
-                Thread.sleep(10);               //Thread wartet auf vorherige Operationen, um Fehler zu vermeiden
+                Thread.sleep(200);               //Thread wartet auf vorherige Operationen, um Fehler zu vermeiden
             } catch (Exception e) {
 
             }
 
-            currentNode = openlist.get(min);        //Neuer Knoten wird zum aktuellen Knoten
-            openlist.remove(min);
+            //currentNode = node;        //Neuer Knoten wird zum aktuellen Knoten
+            openlist.remove(currentNode);
             if(currentNode == end){                 //Prüft ob currentNode der Zielknoten ist
                 System.out.println("Weg gefunden!");
                 showPath();
@@ -91,7 +92,7 @@ public class A_Stern implements Runnable{
 
             double cost = currentNode.getCostFromStart() + successor.getCost();
 
-            if(openlist.containsValue(successor) && cost >= (successor.getCostFromStart())){     //Wenn der Nachbarknoten in der Liste höhere Kosten als der zu betrachtende Knoten,
+            if(openlist.containsKey(successor) && cost >= (successor.getCostFromStart())){     //Wenn der Nachbarknoten in der Liste höhere Kosten als der zu betrachtende Knoten,
                 continue;                                                                                               //dann wird dieser nicht weiter betrachtet.
             }
 
@@ -130,8 +131,8 @@ public class A_Stern implements Runnable{
 
             if(openlist.containsValue(successor)){
                 try{
-                    for(Double key: openlist.keySet()){
-                        if(openlist.get(key).getX() == successor.getX() && openlist.get(key).getY() == successor.getY()){
+                    for(Node key: openlist.keySet()){
+                        if(key.getX() == successor.getX() && key.getY() == successor.getY()){
                             openlist.remove(key);
                             break;
                         }
@@ -142,7 +143,7 @@ public class A_Stern implements Runnable{
 
             }
             successor.setHops(currentNode.getHops()+1);     // Zählt jedesmal um eins hoch.
-            openlist.put((cost + successor.getManhattenDist()), successor);
+            openlist.put(successor, (cost + successor.getManhattenDist()));
         }
     }
 
