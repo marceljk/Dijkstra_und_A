@@ -105,7 +105,7 @@ public class Node {
             case 0:
                 cost = 1;
                 if(isDiagonal) {
-                    cost *= 3;
+                    cost *= 2;
                 }
                 break;
             case 1:
@@ -116,19 +116,19 @@ public class Node {
             case 6:
                 cost = 5;
                 if(isDiagonal) {
-                    cost *= 3;
+                    cost *= 2;
                 }
                 break;
             case 7:
                 cost = 10;
                 if(isDiagonal) {
-                    cost *= 3;
+                    cost *= 2;
                 }
                 break;
             case 8:
-                cost = 5;
+                cost = 6;
                 if(isDiagonal) {
-                    cost *= 3;
+                    cost *= 2;
                 }
                 break;
             default:
