@@ -14,6 +14,7 @@ public class Node {
     private double costFromStart;
     private BoardGUI gui;
     private boolean isDiagonal;
+    private Node backup;
 
     public Node(int type, int x, int y) {
         cellType = type;
@@ -22,6 +23,11 @@ public class Node {
         hops = -1;
         calcCost();
         isDiagonal = false;
+        backup = this;
+    }
+
+    public void reset(Node node) {
+         node = backup;
     }
 
 

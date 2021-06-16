@@ -19,7 +19,7 @@ public class MainView extends JFrame {
     public static void startAStern() {
         System.out.println("A* wurde gestartet");
         aStern = new A_Stern();
-        //clearNodeInfos();
+        clearNodeInfos();
         aStern.setPanelControl(panelcontrol);
         aStern.setGui(boardgui);
         Thread x = new Thread(aStern);
@@ -29,22 +29,22 @@ public class MainView extends JFrame {
     public static void startDijkstra() {
         System.out.println("Dijkstra wurde gestartet");
         dijkstra = new Dijkstra();
-        //clearNodeInfos();
+        clearNodeInfos();
         dijkstra.setGui(boardgui);
         Thread x = new Thread(dijkstra);
         x.start();
     }
 
-    /*
+
     private static void clearNodeInfos() {
         for(int x = 0; x < boardgui.getBoard().length; x++) {
             for(int y = 0; y < boardgui.getBoard()[x].length; y++) {
                 Node temp = boardgui.getBoard()[x][y];
-                temp.reset();
+                temp.reset(temp);
             }
         }
     }
-     */
+
 
     public static void beispiel1AStern() {
         boardgui.beispiel1AStern();
@@ -54,6 +54,10 @@ public class MainView extends JFrame {
     }
 
     public static void randomWall(){ boardgui.randomWall();}
+
+    public static void aSternFalle() {
+        boardgui.aSternfalle();
+    }
 
     public MainView(){
 
