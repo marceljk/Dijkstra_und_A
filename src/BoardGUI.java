@@ -148,29 +148,29 @@ public class BoardGUI extends JPanel implements ActionListener{
     public void beispiel1AStern() {
         allWhite();
         //Startpunkt
-        startx = 7;
-        starty = 3;
+        startx = (widthX/cellSize)/2;
+        starty = (int) ((height/cellSize)*0.25);
         board[startx][starty].setType(2);
 
         //Zielpunkt
-        finishx = 7;
-        finishy = 13;
+        finishx = (widthX/cellSize)/2;
+        finishy = (int) ((height/cellSize)*0.75);
         board[finishx][finishy].setType(3);
 
-        // U Form
-        for (int j = 5; j <= 10; j++) {
-            if(!(board[4][j].getType() == 1)){
-                board[4][j].setType(1);
+        // U Form - Seiten
+        for (int j = starty; j <= ((height/cellSize)*0.6); j++) {
+            if (!(board[(int) ((widthX / cellSize) * 0.3)][j].getType() == 1)) {
+                board[(int) ((widthX / cellSize) * 0.3)][j].setType(1);
+            }
+            if (!(board[(int) ((widthX / cellSize) * 0.7)][j].getType() == 1)) {
+                board[(int) ((widthX / cellSize) * 0.7)][j].setType(1);
             }
         }
-        for (int j = 5; j <= 10; j++) {
-            if(!(board[11][j].getType() == 1)){
-                board[11][j].setType(1);
-            }
-        }
-        for (int j = 4; j <= 10; j++) {
-            if(!(board[j][10].getType() == 1)){
-                board[j][10].setType(1);
+
+        // Unterseite
+        for (int j = (int) ((widthX/cellSize)*0.3); j <= ((widthX/cellSize)*0.7); j++) {
+            if(!(board[j][(int) ((height/cellSize)*0.6)].getType() == 1)){
+                board[j][(int) ((height/cellSize)*0.6)].setType(1);
             }
         }
     }
@@ -178,22 +178,12 @@ public class BoardGUI extends JPanel implements ActionListener{
     public void beispiel2AStern() {
         allWhite();
         // U Form
-        for (int j = 5; j <= 10; j++) {
-            if(!(board[4][j].getType() == 1)){
-                board[4][j].setType(1);
+        beispiel1AStern();
+        for (int j = (int) ((widthX/cellSize)*0.3); j <= ((widthX/cellSize)*0.7); j++) {
+            if(!(board[j][(int) ((height/cellSize)*0.6)].getType() == 1)){
+                board[j][(int) ((height/cellSize)*0.6)].setType(6);
             }
         }
-        for (int j = 5; j <= 10; j++) {
-            if(!(board[11][j].getType() == 1)){
-                board[11][j].setType(1);
-            }
-        }
-        for (int j = 4; j <= 10; j++) {
-            if(!(board[j][10].getType() == 1)){
-                board[j][10].setType(1);
-            }
-        }
-        board[6][10].setType(6);
 
     }
 
@@ -207,11 +197,11 @@ public class BoardGUI extends JPanel implements ActionListener{
     }
 
     public void allWhite() {
-        int amountCellRow = ((widthX +height)/2)/cellSize;
-        for (int i = 0; i < amountCellRow; i++) {
-            for (int j = 0; j < amountCellRow; j++) {
-                if(!(board[i][j].getType() == 0)){
-                    board[i][j].setType(0);
+        //int amountCellRow = ((widthX +height)/2)/cellSize;
+        for (int x = 0; x < widthX/cellSize; x++) {
+            for (int y = 0; y < height/cellSize; y++) {
+                if(!(board[x][y].getType() == 0)){
+                    board[x][y].setType(0);
                 }
             }
         }
