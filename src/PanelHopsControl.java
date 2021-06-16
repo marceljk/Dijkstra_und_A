@@ -70,4 +70,8 @@ public class PanelHopsControl extends JPanel {
     private void test1() {
 
     }
+
+    private void adas(){
+
+    }
 }
