@@ -100,6 +100,7 @@ public class Node {
     }
 
     private void calcCost(){
+        isDiagonal = false;
         switch (getType()) {
             case 0:
                 cost = 1;
@@ -113,7 +114,7 @@ public class Node {
             case 4:
                 break;
             case 6:
-                cost = 15;
+                cost = 5;
                 if(isDiagonal) {
                     cost *= 3;
                 }

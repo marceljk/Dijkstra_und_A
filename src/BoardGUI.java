@@ -3,9 +3,9 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class BoardGUI extends JPanel implements ActionListener{
-    private static int widthX = 450;
-    private static int height = 450;
-    private static int cellSize = 30;
+    private static int widthX = 600;
+    private static int height = 600;
+    private static int cellSize = 20;
 
     private Timer t;
 
@@ -248,8 +248,8 @@ public class BoardGUI extends JPanel implements ActionListener{
                 }
                 g.fillRect(w*cellSize, h*cellSize, cellSize, cellSize);
                 g.setColor(Color.BLACK);
-                //g.drawString(w + "|" + h , w*cellSize, (h*cellSize)+cellSize);
-                g.drawString(""+(int) board[w][h].getCostFromStart() +"|"+ (int) board[w][h].getEuclidDist() , w*cellSize, (h*cellSize)+cellSize);
+                g.drawString(w + "|" + h , w*cellSize, (h*cellSize)+cellSize);
+                //g.drawString(""+(int) board[w][h].getCostFromStart() +"|"+ (int) board[w][h].getEuclidDist() , w*cellSize, (h*cellSize)+cellSize);
                 g.drawRect(w*cellSize, h*cellSize, cellSize, cellSize);
             }
         }

@@ -86,6 +86,7 @@ public class Dijkstra implements Runnable{
 
     private void distanz_update(Node currentNode, Node successor) {
         Double costPath = abstand.get(currentNode) + successor.getCost();
+        successor.setCostFromStart(costPath);
 
         if(costPath < abstand.get(successor)) {
             abstand.remove(successor);
@@ -103,11 +104,14 @@ public class Dijkstra implements Runnable{
             finalNode = vorgänger.get(finalNode);
             path.add(finalNode);
         }
+        System.out.println("Größe: "+path.size());
         for(Node node:path) {
             if( !( node.equals(gui.getBoard()[gui.getStartx()][gui.getStarty()]) || node.equals(gui.getFinalNode()) ) ){
                 node.setType(5);
             }
         }
+        Node[][] temp = gui.getBoard();
+        System.out.println("Kosten: "+ temp[gui.getFinalNode().getLastX()][gui.getFinalNode().getLastY()].getCostFromStart());
     }
 
 }
