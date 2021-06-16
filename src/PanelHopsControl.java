@@ -14,11 +14,11 @@ public class PanelHopsControl extends JPanel {
     private String asterngeprueftString = "000";
     private String dijkstrageprueft = "000";
 
-    private JTextArea asterngepruefttxt = new JTextArea(asterngeprueftString);
-    private JTextArea dijkstragepruefttxt = new JTextArea(dijkstraHopString);
+    private JLabel asterngepruefttxt = new JLabel(asterngeprueftString);
+    private JLabel dijkstragepruefttxt = new JLabel(dijkstraHopString);
 
-    private JTextArea aSternhoptxt = new JTextArea(asternHopString);
-    private JTextArea dijkstrahoptxt = new JTextArea(dijkstraHopString);
+    private JLabel aSternhoptxt = new JLabel(asternHopString);
+    private JLabel dijkstrahoptxt = new JLabel(dijkstraHopString);
 
     private JLabel geprueft = new JLabel("geprüft");
     private JLabel schritte = new JLabel("Schritte");
