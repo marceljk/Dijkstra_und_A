@@ -12,6 +12,7 @@ public class A_Stern implements Runnable{
     private Node end;
     private boolean debug = true;
     private BoardGUI gui;
+    private int gepruefte;
 
 
     @Override
@@ -24,6 +25,7 @@ public class A_Stern implements Runnable{
     }
 
     public void searchPath(){
+        gepruefte = 0;
         gui.clearSearched();
         openlist = new HashMap<>();
         closedList = new ArrayList<>();
@@ -94,6 +96,9 @@ public class A_Stern implements Runnable{
             if(openlist.containsValue(successor) && cost >= (successor.getCostFromStart())){     //Wenn der Nachbarknoten in der Liste höhere Kosten als der zu betrachtende Knoten,
                 continue;                                                                                               //dann wird dieser nicht weiter betrachtet.
             }
+
+            gepruefte++;
+            PanelHopsControl.setASternGeprueft(gepruefte);
 
             if(debug){
                 //Prüfe ob lastNode bei successor schon gesetzt wurde und ob er weiter entfernt zum Ziel ist als vom currentNode
