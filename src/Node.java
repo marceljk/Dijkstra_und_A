@@ -24,6 +24,7 @@ public class Node {
         isDiagonal = false;
     }
 
+
     /**
      * Kalkuliert die euklidische Distanz zum Endpunkt
      * @return
@@ -37,6 +38,13 @@ public class Node {
             return 0.0;
         }
          */
+        return distanz;
+    }
+
+    public double getManhattenDist() {
+        int xdif = Math.abs(x - getFinishx());
+        int ydif = Math.abs(y - getFinishy());
+        distanz = xdif + ydif;
         return distanz;
     }
 
