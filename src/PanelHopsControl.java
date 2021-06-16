@@ -64,5 +64,10 @@ public class PanelHopsControl extends JPanel {
         gbc.gridx = 2;
         gbc.gridy = 2;
         this.add(dijkstragepruefttxt,gbc);
+
+    }
+
+    private void test1() {
+
     }
 }
