@@ -75,7 +75,6 @@ public class Dijkstra implements Runnable{
                 }
             }
         }
-
         erstelleKuerzestenPfad();
     }
 
