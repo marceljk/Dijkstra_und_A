@@ -8,17 +8,11 @@ public class PanelHopsControl extends JPanel {
     private JLabel aSternHops;
     private JLabel dijkstraHops;
 
-    private static String asternHopString = "000";
-    private String dijkstraHopString = "000";
-
-    private static String asterngeprueftString = "000";
-    private String dijkstrageprueft = "000";
-
     private static JLabel asterngepruefttxt = new JLabel("000");
-    private JLabel dijkstragepruefttxt = new JLabel(dijkstraHopString);
+    private static JLabel dijkstragepruefttxt = new JLabel("000");
 
-    private static JLabel aSternhoptxt = new JLabel(asternHopString);
-    private JLabel dijkstrahoptxt = new JLabel(dijkstraHopString);
+    private static JLabel aSternhoptxt = new JLabel("000");
+    private static JLabel dijkstrahoptxt = new JLabel("000");
 
     private JLabel geprueft = new JLabel("geprüft");
     private JLabel schritte = new JLabel("Schritte");
@@ -69,5 +63,9 @@ public class PanelHopsControl extends JPanel {
 
     public static void setaSternhoptext(int hops){
         aSternhoptxt.setText(hops+"");
+    }
+
+    public static void setDijkstraHopTxt(int hops) {
+        dijkstrahoptxt.setText(hops+"");
     }
 }
