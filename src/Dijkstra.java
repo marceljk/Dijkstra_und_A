@@ -112,6 +112,7 @@ public class Dijkstra implements Runnable{
         }
         Node[][] temp = gui.getBoard();
         System.out.println("Kosten: "+ temp[gui.getFinalNode().getLastX()][gui.getFinalNode().getLastY()].getCostFromStart());
+        PanelHopsControl.setDijkstraHopTxt(finalNode.getHops()+1);
     }
 
 }
