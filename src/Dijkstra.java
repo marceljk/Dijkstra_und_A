@@ -33,6 +33,7 @@ public class Dijkstra implements Runnable{
     }
 
     public void searchPath() {
+        int gepruefte;
         gui.clearSearched();
         initialisiere();
 
@@ -43,7 +44,7 @@ public class Dijkstra implements Runnable{
             q.remove(u);
 
             try {
-                Thread.sleep(50);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -53,6 +54,16 @@ public class Dijkstra implements Runnable{
                 if(!(successor.getType() == 3 || successor.getType() == 2 || successor.getType() == 1)){   //Prüft ob der Knoten nicht ein Start-, Zielfeld oder eine Wand ist.
                     successor.setType(4);
                 }
+
+                gepruefte = 0;
+                for(int x = 0; x < gui.getBoard().length; x++) {
+                    for(int y = 0; y < gui.getBoard()[x].length; y++) {
+                        if(gui.getBoard()[x][y].getType() == 4){
+                            gepruefte++;
+                        }
+                    }
+                }
+                PanelHopsControl.setDijkstraGeprueft(gepruefte++);
 
                 if(q.contains(successor)) {
                     distanz_update(u, successor);
@@ -112,7 +123,7 @@ public class Dijkstra implements Runnable{
         }
         Node[][] temp = gui.getBoard();
         System.out.println("Kosten: "+ temp[gui.getFinalNode().getLastX()][gui.getFinalNode().getLastY()].getCostFromStart());
-        PanelHopsControl.setDijkstraHopTxt(finalNode.getHops()+1);
+        PanelHopsControl.setDijkstraHopTxt(path.size()-1);
     }
 
 }
