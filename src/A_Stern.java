@@ -59,11 +59,11 @@ public class A_Stern implements Runnable{
             openlist.remove(min);
             if(currentNode == end){                 //Prüft ob currentNode der Zielknoten ist
                 System.out.println("Weg gefunden!");
-                showPath(currentNode);
+                showPath();
                 search = false;
                 break;
             }
-            closedList.add(currentNode);            //Damit der Knoten nicht wiederholt geprüft wird
+            //closedList.add(currentNode);            //Damit der Knoten nicht wiederholt geprüft wird
 
             //System.out.println("Currentnode: " + currentNode.getX() + " " + currentNode.getY());
 
@@ -79,17 +79,10 @@ public class A_Stern implements Runnable{
      */
     private void expandNode(Node currentNode) {
         for(Node successor: currentNode.getSuccessor()){
-            if(closedList.contains(successor)){
+            /*if(closedList.contains(successor)){
                 continue;
             }
-
-            /*
-            System.out.println("_______________");
-            System.out.println(successor.getX());
-            System.out.println(successor.getY());
-            System.out.println(successor.getEuclidDist());
              */
-
 
             double cost = currentNode.getCostFromStart() + successor.getCost();
 
@@ -142,15 +135,14 @@ public class A_Stern implements Runnable{
 
     /**
      * Zeigt am Ende den richtigen Weg in Gelb an.
-     * @param lastNode
      */
-    private void showPath(Node lastNode){
-        int x;
-        int y;
-        Node finalNode = gui.getBoard()[end.getFinishx()][end.getFinishy()];
+    private void showPath(){
+        Node finalNode = gui.getFinalNode();
+        Node startNode = gui.getStartNode();
         System.out.println(finalNode.getHops()+1);
         PanelHopsControl.setaSternhoptext(finalNode.getCostFromStart());
-            for (int i = 0; i <= finalNode.getHops(); i++){
+        /*
+        for (int i = 0; i <= finalNode.getHops(); i++){
                 x = lastNode.getLastX();
                 y = lastNode.getLastY();
                 lastNode = gui.getBoard()[x][y];
@@ -158,6 +150,15 @@ public class A_Stern implements Runnable{
                     break;
                 }
                 lastNode.setType(5);
+            }
+
+         */
+
+            while (!finalNode.equals(startNode)) {
+                finalNode = gui.getBoard()[finalNode.getLastX()][finalNode.getLastY()];
+                if(!finalNode.equals(startNode)) {
+                    finalNode.setType(5);
+                }
             }
     }
 }
