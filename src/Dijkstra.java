@@ -69,10 +69,12 @@ public class Dijkstra implements Runnable{
                     distanz_update(u, successor);
                 }
 
+                /*
                 if(successor.equals(gui.getFinalNode())){
                     search = false;
                     break;
                 }
+                 */
             }
         }
         erstelleKuerzestenPfad();
@@ -87,7 +89,9 @@ public class Dijkstra implements Runnable{
                 Node v = gui.getBoard()[x][y];
                 abstand.put(v,Double.MAX_VALUE);
                 vorgänger.put(v, null);
-                q.add(v);
+                if(v.getType() != 1) {
+                    q.add(v);
+                }
             }
         }
         abstand.put(gui.getBoard()[gui.getStartx()][gui.getStarty()], 0.0);
@@ -120,9 +124,8 @@ public class Dijkstra implements Runnable{
                 node.setType(5);
             }
         }
-        Node[][] temp = gui.getBoard();
-        System.out.println("Kosten: "+ temp[gui.getFinalNode().getLastX()][gui.getFinalNode().getLastY()].getCostFromStart());
-        PanelHopsControl.setDijkstraHopTxt(path.size()-1);
+        System.out.println("Kosten: "+ gui.getFinalNode().getCostFromStart());
+        PanelHopsControl.setDijkstraHopTxt(gui.getFinalNode().getCostFromStart());
     }
 
 }

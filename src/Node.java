@@ -32,6 +32,9 @@ public class Node {
         int xdif = Math.abs(x - getFinishx());
         int ydif = Math.abs(y - getFinishy());
         distanz = Math.sqrt((xdif * xdif) + (ydif * ydif));
+        if(Math.random() < 0.5) {
+            return 0;
+        }
         return distanz;
     }
 
