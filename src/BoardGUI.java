@@ -3,9 +3,9 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class BoardGUI extends JPanel implements ActionListener{
-    private static int widthX = 600;
-    private static int height = 600;
-    private static int cellSize = 20;
+    private static int widthX = 450;
+    private static int height = 450;
+    private static int cellSize = 30;
 
     private Timer t;
 

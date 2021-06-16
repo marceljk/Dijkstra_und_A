@@ -14,8 +14,8 @@ public class PanelHopsControl extends JPanel {
     private String asterngeprueftString = "000";
     private String dijkstrageprueft = "000";
 
-    private JLabel asterngepruefttxt = new JLabel(asterngeprueftString);
-    private JLabel dijkstragepruefttxt = new JLabel(dijkstraHopString);
+    private JTextArea asterngepruefttxt = new JTextArea(asterngeprueftString);
+    private JTextArea dijkstragepruefttxt = new JTextArea(dijkstraHopString);
 
     private JTextArea aSternhoptxt = new JTextArea(asternHopString);
     private JTextArea dijkstrahoptxt = new JTextArea(dijkstraHopString);
@@ -64,6 +64,14 @@ public class PanelHopsControl extends JPanel {
         gbc.gridx = 2;
         gbc.gridy = 2;
         this.add(dijkstragepruefttxt,gbc);
+
+    }
+
+    private void test1() {
+
+    }
+
+    private void adas(){
 
     }
 }

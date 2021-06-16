@@ -143,7 +143,7 @@ public class A_Stern implements Runnable{
         int x;
         int y;
         Node finalNode = gui.getBoard()[end.getFinishx()][end.getFinishy()];
-        System.out.println(finalNode.getHops());
+        System.out.println(finalNode.getHops()+1);
             for (int i = 0; i <= finalNode.getHops(); i++){
                 x = lastNode.getLastX();
                 y = lastNode.getLastY();
