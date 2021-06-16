@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 public class MainView extends JFrame {
 
-    private PanelControl panelcontrol;
+    private static PanelControl panelcontrol;
     private MainPanelControl mainPanelControl = new MainPanelControl();
 
     private static BoardGUI boardgui = new BoardGUI();
@@ -20,6 +20,7 @@ public class MainView extends JFrame {
         System.out.println("A* wurde gestartet");
         aStern = new A_Stern();
         //clearNodeInfos();
+        aStern.setPanelControl(panelcontrol);
         aStern.setGui(boardgui);
         Thread x = new Thread(aStern);
         x.start();
