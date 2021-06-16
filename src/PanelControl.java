@@ -17,11 +17,11 @@ public class PanelControl extends JPanel {
     private JLabel beispieleTXT = new JLabel("Beispiele:");
     private JLabel leereZeileTXT = new JLabel("");
 
-    private String[] algorithms = {"A*", "Dijkstra"};
+    private static String[] algorithms = {"A* Manhatten","A* Euklidisch", "Dijkstra"};
     private String[] toolboxes = {"Startpunkt", "Ziel", "Wand", "Wasser", "Wüste", "Busch", "Frei"};
     private String[] beispiele = {"A* U-Form", "A* U-Form mit Hindernis", "Zufallswände"};
 
-    private JComboBox algorithm = new JComboBox(algorithms);
+    private static JComboBox algorithm = new JComboBox(algorithms);
     private JComboBox toolboxJCB = new JComboBox(toolboxes);
     private JComboBox beispieleJCB = new JComboBox(beispiele);
 
@@ -95,17 +95,18 @@ public class PanelControl extends JPanel {
         });
 
         start.addActionListener(e -> {
-            if(getSelectedItemAlgorithm().equals("A*")) {
+            if(getSelectedItemAlgorithm().equals("A* Euklidisch")) {
+                MainView.startAStern();
+            } else if(getSelectedItemAlgorithm().equals("A* Manhatten")) {
                 MainView.startAStern();
             }
             else {
                 MainView.startDijkstra();
             }
         });
-
     }
 
-    private Object getSelectedItemAlgorithm() {
+    public static Object getSelectedItemAlgorithm() {
         return algorithm.getSelectedItem();
     }
 

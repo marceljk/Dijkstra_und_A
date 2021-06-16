@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 public class A_Stern implements Runnable{
 
+    private PanelControl pc;
+
     private Node node;
     private HashMap<Double, Node> openlist;
     private ArrayList<Node> closedList;
@@ -96,9 +98,17 @@ public class A_Stern implements Runnable{
                 //Prüfe ob lastNode bei successor schon gesetzt wurde und ob er weiter entfernt zum Ziel ist als vom currentNode
                 if(successor.isLastNodeSet()){
                     Node lastNode = gui.getBoard()[currentNode.getLastX()][currentNode.getLastY()];
-                    if(lastNode.getManhattenDist() > successor.getManhattenDist()){
-                        successor.setLastNode(currentNode.getX(), currentNode.getY());          // Speichert den letzten Schritt, damit wir den Gesamtweg am Ende anzeigen können (ff.)
-                        successor.setCostFromStart(cost);
+
+                    if(pc.getSelectedItemAlgorithm().equals("A* Manhatten")) {
+                        if (lastNode.getManhattenDist() > successor.getManhattenDist()) {
+                            successor.setLastNode(currentNode.getX(), currentNode.getY());          // Speichert den letzten Schritt, damit wir den Gesamtweg am Ende anzeigen können (ff.)
+                            successor.setCostFromStart(cost);
+                        }
+                    } else {
+                        if (lastNode.getEuclidDist() > successor.getEuclidDist()) {
+                            successor.setLastNode(currentNode.getX(), currentNode.getY());          // Speichert den letzten Schritt, damit wir den Gesamtweg am Ende anzeigen können (ff.)
+                            successor.setCostFromStart(cost);
+                        }
                     }
                 } else {
                     successor.setLastNode(currentNode.getX(), currentNode.getY());          // Speichert den letzten Schritt, damit wir den Gesamtweg am Ende anzeigen können (ff.)
