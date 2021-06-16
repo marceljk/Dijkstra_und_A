@@ -65,7 +65,15 @@ public class PanelHopsControl extends JPanel {
         aSternhoptxt.setText(hops+"");
     }
 
+    public static void setASternGeprueft(int geprueft) {
+        asterngepruefttxt.setText(geprueft+"");
+    }
+
     public static void setDijkstraHopTxt(int hops) {
         dijkstrahoptxt.setText(hops+"");
+    }
+
+    public static void setDijkstraGeprueft(int geprueft) {
+        dijkstragepruefttxt.setText(geprueft+"");
     }
 }
