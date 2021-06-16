@@ -26,6 +26,10 @@ public class A_Stern implements Runnable{
         this.gui = gui;
     }
 
+    public void setPanelControl(PanelControl pc) {
+        this.pc = pc;
+    }
+
     public void searchPath(){
         gepruefte = 0;
         gui.clearSearched();

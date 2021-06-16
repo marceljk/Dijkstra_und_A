@@ -3,9 +3,9 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class BoardGUI extends JPanel implements ActionListener{
-    private static int widthX = 600;
-    private static int height = 600;
-    private static int cellSize = 30;
+    private static int widthX = 450;
+    private static int height = 450;
+    private static int cellSize = 40;
 
     private Timer t;
 
@@ -195,6 +195,15 @@ public class BoardGUI extends JPanel implements ActionListener{
         }
         board[6][10].setType(6);
 
+    }
+
+    public void aSternfalle() {
+        allWhite();
+        for (int x = 2; x < 10; x++) {
+            if(!(board[x][9].getType() == 1)){
+                board[x][9].setType(1);
+            }
+        }
     }
 
     public void allWhite() {
