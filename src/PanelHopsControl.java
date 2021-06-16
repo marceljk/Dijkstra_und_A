@@ -11,10 +11,10 @@ public class PanelHopsControl extends JPanel {
     private String asternHopString = "000";
     private String dijkstraHopString = "000";
 
-    private String asterngeprueftString = "000";
+    private static String asterngeprueftString = "000";
     private String dijkstrageprueft = "000";
 
-    private JLabel asterngepruefttxt = new JLabel(asterngeprueftString);
+    private static JLabel asterngepruefttxt = new JLabel("000");
     private JLabel dijkstragepruefttxt = new JLabel(dijkstraHopString);
 
     private JLabel aSternhoptxt = new JLabel(asternHopString);
@@ -47,11 +47,11 @@ public class PanelHopsControl extends JPanel {
 
         gbc.gridx = 1;
         gbc.gridy = 1;
-        this.add(aSternhoptxt,gbc);
+        this.add(asterngepruefttxt,gbc);
 
         gbc.gridx = 2;
         gbc.gridy = 1;
-        this.add(asterngepruefttxt,gbc);
+        this.add(aSternhoptxt,gbc);
 
         gbc.gridx = 0;
         gbc.gridy = 2;
@@ -59,19 +59,15 @@ public class PanelHopsControl extends JPanel {
 
         gbc.gridx = 1;
         gbc.gridy = 2;
-        this.add(dijkstrahoptxt,gbc);
+        this.add(dijkstragepruefttxt,gbc);
 
         gbc.gridx = 2;
         gbc.gridy = 2;
-        this.add(dijkstragepruefttxt,gbc);
+        this.add(dijkstrahoptxt,gbc);
 
     }
 
-    private void test1() {
-
-    }
-
-    private void adas(){
-
+    public static void setaSternhoptext(int hops){
+        asterngepruefttxt.setText(hops+"");
     }
 }
