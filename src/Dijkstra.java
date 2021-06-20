@@ -68,13 +68,6 @@ public class Dijkstra implements Runnable{
                 if(q.contains(successor)) {
                     distanz_update(u, successor);
                 }
-
-                /*
-                if(successor.equals(gui.getFinalNode())){
-                    search = false;
-                    break;
-                }
-                 */
             }
         }
         erstelleKuerzestenPfad();

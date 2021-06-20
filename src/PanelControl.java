@@ -13,7 +13,6 @@ public class PanelControl extends JPanel {
     private JLabel algorithmen = new JLabel("Algorithmen:");
     private JLabel toolboxTXT = new JLabel("Toolbox:");
     private JLabel beispieleTXT = new JLabel("Beispiele:");
-    private JLabel leereZeileTXT = new JLabel("");
 
     private static String[] algorithms = {"A* Manhatten","A* Euklidisch", "Dijkstra"};
     private String[] toolboxes = {"Startpunkt", "Ziel", "Wand", "Wasser", "Wüste", "Frei"};

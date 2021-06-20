@@ -88,21 +88,6 @@ public class BoardGUI extends JPanel implements ActionListener {
 
 
     private void setType(int x, int y) {
-        /*
-        if(clickCounter == 1) {
-            board[x][y].setType(2);
-            startx = x;
-            starty = y;
-            clickCounter ++;
-        }else if(x == startx && y == starty){
-        }else if (clickCounter == 2) {
-            board[x][y].setType(3);
-            finishx = x;
-            finishy = y;
-            clickCounter ++;
-        }
-         */
-
         if (panelControl.getSelectedItemToolBox().equals("Startpunkt")) {
             isSetStartFinal(2);
             board[x][y].setType(2);
@@ -121,8 +106,6 @@ public class BoardGUI extends JPanel implements ActionListener {
             board[x][y].setType(7);
         } else if (panelControl.getSelectedItemToolBox().equals("Frei")) {
             board[x][y].setType(0);
-        } else if (panelControl.getSelectedItemToolBox() == null) {
-            System.out.println("Probelm ist aufgetreten");
         }
     }
 
@@ -133,7 +116,6 @@ public class BoardGUI extends JPanel implements ActionListener {
                     board[x][y].setType(0);
                     break;
                 }
-                ;
             }
         }
     }
@@ -179,7 +161,7 @@ public class BoardGUI extends JPanel implements ActionListener {
         //int amountCellRow = ((widthX +height)/2)/cellSize;
         for (int x = 0; x < widthX / cellSize; x++) {
             for (int y = 0; y < height / cellSize; y++) {
-                if (!(board[x][y].getType() == 0)) {
+                if (board[x][y].getType() != 0) {
                     board[x][y].setType(0);
                 }
             }
@@ -196,7 +178,7 @@ public class BoardGUI extends JPanel implements ActionListener {
         super.paintComponent(g);
         for (int w = 0; w < board.length; w++) {
             for (int h = 0; h < board[w].length; h++) {
-                // 0 = leer, 1 = wand, 2 = start, 3 = ende, 4 = untersucht, 5 = weg, 6 = wasser, 7 = wüste, 8 = busch
+                // 0 = leer, 1 = wand, 2 = start, 3 = ende, 4 = untersucht, 5 = weg, 6 = wasser, 7 = wüste
                 if (board[w][h].getType() == 0) {
                     g.setColor(Color.WHITE);
                 }
@@ -223,8 +205,6 @@ public class BoardGUI extends JPanel implements ActionListener {
                 }
                 g.fillRect(w * cellSize, h * cellSize, cellSize, cellSize);
                 g.setColor(Color.BLACK);
-                g.drawString(w + "|" + h, w * cellSize, (h * cellSize) + cellSize);
-                //g.drawString(getBoard()[w][h].getHops()+"|"+ getBoard()[w][h].getCostFromStart() , w*cellSize, (h*cellSize)+cellSize);
                 //g.drawString(""+(int) board[w][h].getCostFromStart() +"|"+ (int) board[w][h].getEuclidDist() , w*cellSize, (h*cellSize)+cellSize);
                 g.drawRect(w * cellSize, h * cellSize, cellSize, cellSize);
             }
@@ -271,7 +251,7 @@ public class BoardGUI extends JPanel implements ActionListener {
         return height;
     }
 
-private class MouseListener2 implements MouseListener, MouseMotionListener {
+private class MouseListener2 implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -300,14 +280,6 @@ private class MouseListener2 implements MouseListener, MouseMotionListener {
     @Override
     public void mouseExited(MouseEvent e) {
 
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseMoved(MouseEvent e) {
     }
 }
 }

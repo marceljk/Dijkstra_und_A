@@ -35,11 +35,6 @@ public class Node {
         int xdif = Math.abs(x - getFinishx());
         int ydif = Math.abs(y - getFinishy());
         distanz = Math.sqrt((xdif * xdif) + (ydif * ydif));
-        /*
-        if(Math.random() < 0.5) {
-            return 0.0;
-        }
-         */
         return distanz;
     }
 
@@ -56,9 +51,8 @@ public class Node {
      */
     public ArrayList<Node> getSuccessor(){
         ArrayList<Node> output = new ArrayList<>();
-        int counter = 0;
         int cellsize = gui.getCellSize();
-        Node temp = this;
+        Node temp;
         for(int xtemp = -1; xtemp <= 1; xtemp++){
             for (int ytemp = -1; ytemp <= 1; ytemp++){
                 int randX = (x+(xtemp));
@@ -75,7 +69,6 @@ public class Node {
                     temp = gui.getBoard()[x+xtemp][y+ytemp];
                     if(temp.getType() != 1){                //Prüft ob der Knoten nicht eine Wand ist.
                         output.add(gui.getBoard()[x+xtemp][y+ytemp]);
-                        counter++;
                     }
                 }
             }
@@ -104,7 +97,6 @@ public class Node {
         return cellType;
     }
 
-    //TODO: Anzahl der Schritte die gelaufen werden müssen
     public int getHops() {
         return hops;
     }
