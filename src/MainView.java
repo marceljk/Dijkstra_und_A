@@ -45,7 +45,6 @@ public class MainView extends JFrame {
         }
     }
 
-
     public static void beispiel1AStern() {
         boardgui.beispiel1AStern();
     }
