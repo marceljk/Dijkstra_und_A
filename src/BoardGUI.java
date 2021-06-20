@@ -60,11 +60,45 @@ public class BoardGUI extends JPanel implements ActionListener{
         reset();
         int i = 0;
         int amountCellRow = ((widthX +height)/2)/cellSize;
-        while (i < (amountCellRow*percentWall(50)) ){
+        while (i < (amountCellRow*percentWall(60)) ){
             int w = (int) (Math.random()*amountCellRow);
             int h = (int) (Math.random()*amountCellRow);
             if(!(board[w][h].getType() == 1)){
                 board[w][h].setType(1);
+                i++;
+            }
+        }
+    }
+
+    public void randomFields(){
+        reset();
+        int i = 0;
+        int amountCellRow = ((widthX +height)/2)/cellSize;
+        while (i < (amountCellRow*percentWall(33)) ){
+            int w = (int) (Math.random()*amountCellRow);
+            int h = (int) (Math.random()*amountCellRow);
+            if(!(board[w][h].getType() == 6)){
+                board[w][h].setType(6);
+                i++;
+            }
+        }
+
+        i = 0;
+        while (i < (amountCellRow*percentWall(33)) ){
+            int w = (int) (Math.random()*amountCellRow);
+            int h = (int) (Math.random()*amountCellRow);
+            if(board[w][h].getType() != 6 || board[w][h].getType() != 7){
+                board[w][h].setType(7);
+                i++;
+            }
+        }
+
+        i = 0;
+        while (i < (amountCellRow*percentWall(33)) ){
+            int w = (int) (Math.random()*amountCellRow);
+            int h = (int) (Math.random()*amountCellRow);
+            if(board[w][h].getType() != 6 || board[w][h].getType() != 7 || board[w][h].getType() != 8){
+                board[w][h].setType(8);
                 i++;
             }
         }
