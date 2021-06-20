@@ -125,12 +125,10 @@ public class A_Stern implements Runnable{
                 successor.setCostFromStart(cost);
             }
 
-            /*
-            if(!(successor.getType() == 3 || successor.getType() == 2 || successor.getType() == 1 || successor.getType() == 6)){   //Prüft ob der Knoten nicht ein Start-, Zielfeld oder eine Wand ist.
-                successor.setType(4);
-            }
-             */
 
+            if(!(successor.getType() == 3 || successor.getType() == 2 || successor.getType() == 1 || successor.getType() == 6)){   //Prüft ob der Knoten nicht ein Start-, Zielfeld oder eine Wand ist.
+                successor.setSearched(true);
+            }
 
 
             if(openlist.containsValue(successor)){
@@ -175,7 +173,7 @@ public class A_Stern implements Runnable{
             while (!finalNode.equals(startNode)) {
                 finalNode = gui.getBoard()[finalNode.getLastX()][finalNode.getLastY()];
                 if(!finalNode.equals(startNode)) {
-                    finalNode.setType(5);
+                    finalNode.setPath(true);
                 }
             }
     }

@@ -52,7 +52,7 @@ public class Dijkstra implements Runnable{
             for(Node successor: u.getSuccessor()) {
 
                 if(!(successor.getType() == 3 || successor.getType() == 2 || successor.getType() == 1)){   //Prüft ob der Knoten nicht ein Start-, Zielfeld oder eine Wand ist.
-                    successor.setType(4);
+                    successor.setSearched(true);
                 }
 
                 gepruefte = 0;
@@ -121,7 +121,7 @@ public class Dijkstra implements Runnable{
         System.out.println("Größe: "+path.size());
         for(Node node:path) {
             if( !( node.equals(gui.getBoard()[gui.getStartx()][gui.getStarty()]) || node.equals(gui.getFinalNode()) ) ){
-                node.setType(5);
+                node.setPath(true);
             }
         }
         System.out.println("Kosten: "+ gui.getFinalNode().getCostFromStart());

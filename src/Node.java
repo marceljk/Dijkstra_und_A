@@ -14,7 +14,8 @@ public class Node {
     private double costFromStart;
     private BoardGUI gui;
     private boolean isDiagonal;
-    private Node backup;
+    private boolean isPath = false;
+    private boolean isSearched;
 
     public Node(int type, int x, int y) {
         cellType = type;
@@ -23,11 +24,6 @@ public class Node {
         hops = -1;
         calcCost();
         isDiagonal = false;
-        backup = this;
-    }
-
-    public void reset(Node node) {
-         node = this.backup;
     }
 
 
@@ -193,5 +189,21 @@ public class Node {
     //TODO: Anzahl der Schritte die gelaufen werden müssen
     public void setHops(int hops) {
         this.hops = hops;
+    }
+
+    public boolean isPath() {
+        return isPath;
+    }
+
+    public void setPath(boolean path) {
+        isPath = path;
+    }
+
+    public boolean isSearched() {
+        return isSearched;
+    }
+
+    public void setSearched(boolean searched) {
+        isSearched = searched;
     }
 }

@@ -40,7 +40,6 @@ public class MainView extends JFrame {
         for(int x = 0; x < boardgui.getBoard().length; x++) {
             for(int y = 0; y < boardgui.getBoard()[x].length; y++) {
                 Node temp = boardgui.getBoard()[x][y];
-                temp.reset(temp);
             }
         }
     }
