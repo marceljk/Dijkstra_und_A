@@ -152,8 +152,6 @@ public class BoardGUI extends JPanel implements ActionListener{
             board[x][y].setType(6);
         }else if(panelControl.getSelectedItemToolBox().equals("Wüste")) {
             board[x][y].setType(7);
-        }else if(panelControl.getSelectedItemToolBox().equals("Busch")){
-            board[x][y].setType(8);
         }else if(panelControl.getSelectedItemToolBox().equals("Frei")) {
             board[x][y].setType(0);
         }else if(panelControl.getSelectedItemToolBox() == null){
@@ -253,9 +251,6 @@ public class BoardGUI extends JPanel implements ActionListener{
                 }
                 if(board[w][h].getType() == 7) {
                     g.setColor(Color.orange);
-                }
-                if(board[w][h].getType() == 8) {
-                    g.setColor(Color.green);
                 }
                 g.fillRect(w*cellSize, h*cellSize, cellSize, cellSize);
                 g.setColor(Color.BLACK);

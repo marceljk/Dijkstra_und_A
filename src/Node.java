@@ -144,12 +144,6 @@ public class Node {
                     cost *= 2;
                 }
                 break;
-            case 8:
-                cost = 6;
-                if(isDiagonal) {
-                    cost *= 2;
-                }
-                break;
             default:
                 cost = 1;
                 break;

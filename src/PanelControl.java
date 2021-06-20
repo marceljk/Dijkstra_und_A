@@ -17,7 +17,7 @@ public class PanelControl extends JPanel {
     private JLabel leereZeileTXT = new JLabel("");
 
     private static String[] algorithms = {"A* Manhatten","A* Euklidisch", "Dijkstra"};
-    private String[] toolboxes = {"Startpunkt", "Ziel", "Wand", "Wasser", "Wüste", "Busch", "Frei"};
+    private String[] toolboxes = {"Startpunkt", "Ziel", "Wand", "Wasser", "Wüste", "Frei"};
     private String[] beispiele = {"U-Form", "Zufallswände", "Zufallshindernisse"};
 
     private static JComboBox algorithm = new JComboBox(algorithms);
