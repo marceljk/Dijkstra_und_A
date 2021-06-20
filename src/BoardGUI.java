@@ -3,9 +3,9 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class BoardGUI extends JPanel implements ActionListener{
-    private static int widthX = 450;
-    private static int height = 450;
-    private static int cellSize = 30;
+    private static int widthX = 600;
+    private static int height = 600;
+    private static int cellSize = 20;
 
     private Timer t;
 
@@ -175,53 +175,6 @@ public class BoardGUI extends JPanel implements ActionListener{
         }
     }
 
-    public void beispiel2AStern() {
-        allWhite();
-        // U Form
-        beispiel1AStern();
-        for (int j = (int) ((widthX/cellSize)*0.3); j <= ((widthX/cellSize)*0.7); j++) {
-            if(!(board[j][(int) ((height/cellSize)*0.6)].getType() == 1)){
-                board[j][(int) ((height/cellSize)*0.6)].setType(6);
-            }
-        }
-
-    }
-
-    public void aSternfalle() {
-        allWhite();
-        //Startpunkt
-        startx = 0;
-        starty = 0;
-        board[startx][starty].setType(2);
-
-        //Zielpunkt
-        finishx = (widthX / cellSize)/5;
-        finishy = (int) ((height/cellSize)*0.9);
-        board[finishx][finishy].setType(3);
-
-        // 1. Vertikale
-        for (int j = 0; j <= ((widthX/cellSize)*0.3); j++) {
-            if(!(board[j][(int) ((height/cellSize)*0.3)].getType() == 1)){
-                board[j][(int) ((height/cellSize)*0.3)].setType(1);
-            }
-        }
-
-        // 1. Horizontal
-        for (int j = 0; j <= ((height/cellSize)*0.1); j++) {
-            if(!(board[j][(int) ((widthX/cellSize)*0.3)].getType() == 1)){
-                board[j][(int) ((widthX/cellSize)*0.3)].setType(1);
-            }
-        }
-
-        // 2. Vertikale
-        for (int j = 0; j <= ((widthX/cellSize)*0.6); j++) {
-            if(!(board[j][(int) ((height/cellSize)*0.5)].getType() == 1)){
-                board[j][(int) ((height/cellSize)*0.5)].setType(1);
-            }
-        }
-
-    }
-
     public void allWhite() {
         //int amountCellRow = ((widthX +height)/2)/cellSize;
         for (int x = 0; x < widthX/cellSize; x++) {
@@ -232,7 +185,6 @@ public class BoardGUI extends JPanel implements ActionListener{
             }
         }
     }
-
 
     /**
      * Prüft, um welche Art von "Kästchen" es sich handelt und färbt es entsprechend.

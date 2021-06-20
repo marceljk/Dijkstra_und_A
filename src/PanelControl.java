@@ -10,7 +10,6 @@ public class PanelControl extends JPanel {
     private JButton start = new JButton("Starte");
     private JButton reset = new JButton("Zurücksetzen");
     private JButton b1Astern = new JButton("Beispiel 1 A*");
-    private JButton b2Astern = new JButton("Beispiel 2 A*");
 
     private JLabel algorithmen = new JLabel("Algorithmen:");
     private JLabel toolboxTXT = new JLabel("Toolbox:");
@@ -19,7 +18,7 @@ public class PanelControl extends JPanel {
 
     private static String[] algorithms = {"A* Manhatten","A* Euklidisch", "Dijkstra"};
     private String[] toolboxes = {"Startpunkt", "Ziel", "Wand", "Wasser", "Wüste", "Busch", "Frei"};
-    private String[] beispiele = {"A* U-Form", "A* U-Form mit Hindernis", "Zufallswände", "A* Falle"};
+    private String[] beispiele = {"U-Form", "Zufallswände"};
 
     private static JComboBox algorithm = new JComboBox(algorithms);
     private JComboBox toolboxJCB = new JComboBox(toolboxes);
@@ -85,14 +84,10 @@ public class PanelControl extends JPanel {
         });
 
         beispieleJCB.addActionListener(e -> {
-            if(getSelectedItemBeispiele().equals("A* U-Form")) {
+            if(getSelectedItemBeispiele().equals("U-Form")) {
                 MainView.beispiel1AStern();
-            } else if(getSelectedItemBeispiele().equals("A* U-Form mit Hindernis")) {
-                MainView.beispiel2AStern();
             } else if(getSelectedItemBeispiele().equals("Zufallswände")) {
                 MainView.randomWall();
-            } else if(getSelectedItemBeispiele().equals("A* Falle")) {
-                MainView.aSternFalle();
             }
         });
 

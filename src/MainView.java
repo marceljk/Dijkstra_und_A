@@ -50,14 +50,7 @@ public class MainView extends JFrame {
         boardgui.beispiel1AStern();
     }
 
-    public static void beispiel2AStern() {boardgui.beispiel2AStern();
-    }
-
     public static void randomWall(){ boardgui.randomWall();}
-
-    public static void aSternFalle() {
-        boardgui.aSternfalle();
-    }
 
     public MainView(){
 
