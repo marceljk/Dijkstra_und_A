@@ -58,12 +58,12 @@ public class Dijkstra implements Runnable{
                 gepruefte = 0;
                 for(int x = 0; x < gui.getBoard().length; x++) {
                     for(int y = 0; y < gui.getBoard()[x].length; y++) {
-                        if(gui.getBoard()[x][y].getType() == 4){
+                        if(gui.getBoard()[x][y].isSearched()){
                             gepruefte++;
                         }
                     }
                 }
-                PanelHopsControl.setDijkstraGeprueft(gepruefte++);
+                PanelHopsControl.setDijkstraGeprueft(gepruefte);
 
                 if(q.contains(successor)) {
                     distanz_update(u, successor);
