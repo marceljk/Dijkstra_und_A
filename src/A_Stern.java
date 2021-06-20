@@ -125,7 +125,7 @@ public class A_Stern implements Runnable{
                 successor.setCostFromStart(cost);
             }
 
-            if(!(successor.getType() == 3 || successor.getType() == 2 || successor.getType() == 1)){   //Prüft ob der Knoten nicht ein Start-, Zielfeld oder eine Wand ist.
+            if(!(successor.getType() == 3 || successor.getType() == 2 || successor.getType() == 1 || successor.getType() == 6)){   //Prüft ob der Knoten nicht ein Start-, Zielfeld oder eine Wand ist.
                 successor.setType(4);
             }
 
