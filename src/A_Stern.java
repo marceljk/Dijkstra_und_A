@@ -6,10 +6,8 @@ public class A_Stern implements Runnable{
 
     private PanelControl pc;
 
-    private Node node;
     private HashMap<Node, Double> openlist;
     private ArrayList<Node> closedList;
-    private ArrayList<Node> sortList;
     private boolean search;
     private Node end;
     private boolean debug = true;
@@ -62,7 +60,6 @@ public class A_Stern implements Runnable{
 
             }
 
-            //currentNode = node;        //Neuer Knoten wird zum aktuellen Knoten
             openlist.remove(currentNode);
             if(currentNode == end){                 //Prüft ob currentNode der Zielknoten ist
                 System.out.println("Weg gefunden!");
@@ -71,8 +68,6 @@ public class A_Stern implements Runnable{
                 break;
             }
             closedList.add(currentNode);            //Damit der Knoten nicht wiederholt geprüft wird
-
-            //System.out.println("Currentnode: " + currentNode.getX() + " " + currentNode.getY());
 
             expandNode(currentNode);
 
@@ -157,18 +152,6 @@ public class A_Stern implements Runnable{
         Node startNode = gui.getStartNode();
         System.out.println(finalNode.getHops()+1);
         PanelHopsControl.setaSternhoptext(finalNode.getCostFromStart());
-        /*
-        for (int i = 0; i <= finalNode.getHops(); i++){
-                x = lastNode.getLastX();
-                y = lastNode.getLastY();
-                lastNode = gui.getBoard()[x][y];
-                if((x == gui.getStartx()) && (y == gui.getStarty())) {
-                    break;
-                }
-                lastNode.setType(5);
-            }
-
-         */
 
             while (!finalNode.equals(startNode)) {
                 finalNode = gui.getBoard()[finalNode.getLastX()][finalNode.getLastY()];
