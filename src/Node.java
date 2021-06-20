@@ -27,7 +27,7 @@ public class Node {
     }
 
     public void reset(Node node) {
-         node = backup;
+         node = this.backup;
     }
 
 
@@ -154,7 +154,6 @@ public class Node {
                 cost = 1;
                 break;
         }
-
     }
 
     public void setGui(BoardGUI gui) {

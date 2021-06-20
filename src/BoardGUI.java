@@ -5,7 +5,7 @@ import java.awt.event.*;
 public class BoardGUI extends JPanel implements ActionListener{
     private static int widthX = 450;
     private static int height = 450;
-    private static int cellSize = 40;
+    private static int cellSize = 30;
 
     private Timer t;
 
@@ -189,11 +189,37 @@ public class BoardGUI extends JPanel implements ActionListener{
 
     public void aSternfalle() {
         allWhite();
-        for (int x = 2; x < 10; x++) {
-            if(!(board[x][9].getType() == 1)){
-                board[x][9].setType(1);
+        //Startpunkt
+        startx = 0;
+        starty = 0;
+        board[startx][starty].setType(2);
+
+        //Zielpunkt
+        finishx = (widthX / cellSize)/5;
+        finishy = (int) ((height/cellSize)*0.9);
+        board[finishx][finishy].setType(3);
+
+        // 1. Vertikale
+        for (int j = 0; j <= ((widthX/cellSize)*0.3); j++) {
+            if(!(board[j][(int) ((height/cellSize)*0.3)].getType() == 1)){
+                board[j][(int) ((height/cellSize)*0.3)].setType(1);
             }
         }
+
+        // 1. Horizontal
+        for (int j = 0; j <= ((height/cellSize)*0.1); j++) {
+            if(!(board[j][(int) ((widthX/cellSize)*0.3)].getType() == 1)){
+                board[j][(int) ((widthX/cellSize)*0.3)].setType(1);
+            }
+        }
+
+        // 2. Vertikale
+        for (int j = 0; j <= ((widthX/cellSize)*0.6); j++) {
+            if(!(board[j][(int) ((height/cellSize)*0.5)].getType() == 1)){
+                board[j][(int) ((height/cellSize)*0.5)].setType(1);
+            }
+        }
+
     }
 
     public void allWhite() {
