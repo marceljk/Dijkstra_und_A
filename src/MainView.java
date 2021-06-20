@@ -51,10 +51,6 @@ public class MainView extends JFrame {
 
     public static void randomWall(){ boardgui.randomWall();}
 
-    public static void randomFields() {
-        boardgui.randomFields();
-    }
-
     public MainView(){
 
         // Layout
