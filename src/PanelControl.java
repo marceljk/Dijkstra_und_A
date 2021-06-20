@@ -18,7 +18,7 @@ public class PanelControl extends JPanel {
 
     private static String[] algorithms = {"A* Manhatten","A* Euklidisch", "Dijkstra"};
     private String[] toolboxes = {"Startpunkt", "Ziel", "Wand", "Wasser", "Wüste", "Busch", "Frei"};
-    private String[] beispiele = {"U-Form", "Zufallswände"};
+    private String[] beispiele = {"U-Form", "Zufallswände", "Zufallshindernisse"};
 
     private static JComboBox algorithm = new JComboBox(algorithms);
     private JComboBox toolboxJCB = new JComboBox(toolboxes);
@@ -88,6 +88,8 @@ public class PanelControl extends JPanel {
                 MainView.beispiel1AStern();
             } else if(getSelectedItemBeispiele().equals("Zufallswände")) {
                 MainView.randomWall();
+            } else if(getSelectedItemBeispiele().equals("Zufallshindernisse")) {
+                MainView.randomFields();
             }
         });
 
