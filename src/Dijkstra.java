@@ -1,9 +1,6 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 
-/**
- *
- */
 public class Dijkstra implements Runnable{
     private BoardGUI gui;
     private ArrayList<Node> q;
@@ -41,10 +38,10 @@ public class Dijkstra implements Runnable{
         gui.clearSearched();
         initialisiere();
 
-        boolean search = true;
+        boolean search = true;          // Wird im Code garnicht geändert?
         try {
             while (!q.isEmpty() && search) {        // Solange Suche nicht beendet und kürzester Pfad nicht gefunden, wiederhole Suche
-                Node u = getMinDistNode();          //
+                Node u = getMinDistNode();          // Knoten mit niedrigsten Kosten
                 q.remove(u);                        // Knoten mit niedrigsten Kosten wird von Liste entfernt.
 
                 try {
@@ -56,7 +53,7 @@ public class Dijkstra implements Runnable{
                 for (Node successor : u.getSuccessor()) {     // Bekommt die Nachbarknoten von dem letzten betrachteten Knoten, welcher entfernt wurde.
 
                     if (!(successor.getType() == 3 || successor.getType() == 2 || successor.getType() == 1)) {   //Prüft ob der Knoten nicht ein Start-, Zielfeld oder eine Wand ist.
-                        successor.setSearched(true);
+                        successor.setSearched(true);        // ???
                     }
 
                     gepruefte = 0;
@@ -70,7 +67,7 @@ public class Dijkstra implements Runnable{
                     PanelHopsControl.setDijkstraGeprueft(gepruefte);        // Zeigt an, wie viele Knoten bereits geprüft sind.
 
                     if (q.contains(successor)) {
-                        distanz_update(u, successor);
+                        distanz_update(u, successor);       // Knoten mit niedrigsten Kosten + Nachbarknoten
                     }
                 }
             }
@@ -81,6 +78,9 @@ public class Dijkstra implements Runnable{
         }
     }
 
+    /**
+     * Abstände und Vorgänger vom Graphen und vom Startknoten werden initialisiert.
+     */
     private void initialisiere() {
         q = new ArrayList<>();
         abstand = new HashMap<>();
@@ -98,6 +98,11 @@ public class Dijkstra implements Runnable{
         abstand.put(gui.getBoard()[gui.getStartx()][gui.getStarty()], 0.0);
     }
 
+    /**
+     *
+     * @param currentNode -> aktuell günstigster Knoten
+     * @param successor -> Nachbarknoten
+     */
     private void distanz_update(Node currentNode, Node successor) {
         Double costPath = abstand.get(currentNode) + successor.getCost();
         successor.setCostFromStart(costPath);
@@ -110,6 +115,9 @@ public class Dijkstra implements Runnable{
         }
     }
 
+    /**
+     * Durch Iteration der Vorgänger wird der kürzeste Pfad herausgefunden.
+     */
     private void erstelleKuerzestenPfad() {
         ArrayList<Node> path = new ArrayList<>();
         Node finalNode = gui.getFinalNode();
