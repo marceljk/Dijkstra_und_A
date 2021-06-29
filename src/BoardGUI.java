@@ -61,7 +61,7 @@ public class BoardGUI extends JPanel implements ActionListener {
         reset();
         int i = 0;
         int amountCellRow = ((widthX + height) / 2) / cellSize;
-        while (i < (amountCellRow * percentWall(60))) {
+        while (i < (amountCellRow * percentWall(55))) {
             int w = (int) (Math.random() * amountCellRow);
             int h = (int) (Math.random() * amountCellRow);
             if (!(board[w][h].getType() == 1)) {

@@ -124,21 +124,8 @@ public class A_Stern implements Runnable {
             }
 
 
-            if (openlist.containsValue(successor)) {
+            if (openlist.containsKey(successor)) {
                 openlist.remove(successor);
-                /*
-                try {
-                    for (Node key : openlist.keySet()) {
-                        if (key.getX() == successor.getX() && key.getY() == successor.getY()) {
-                            openlist.remove(key);
-                            break;
-                        }
-                    }
-                } catch (Exception e) {
-                    System.err.println(e);
-                }
-
-                 */
 
             }
             successor.setHops(currentNode.getHops() + 1);     // Zählt jedesmal um eins hoch.
