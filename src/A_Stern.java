@@ -46,7 +46,7 @@ public class A_Stern implements Runnable {
             }
 
             try {
-                Thread.sleep(100);               //Thread wartet auf vorherige Operationen, um Fehler zu vermeiden
+                Thread.sleep(10);               //Thread wartet auf vorherige Operationen, um Fehler zu vermeiden
             } catch (Exception e) {
 
             }
