@@ -15,7 +15,7 @@ public class PanelHopsControl extends JPanel {
     private static JLabel dijkstrahoptxt = new JLabel("000");
 
     private JLabel geprueft = new JLabel("geprüft");
-    private JLabel schritte = new JLabel("Schritte");
+    private JLabel schritte = new JLabel("Kosten");
 
     //BORDER
     Border loweredetched = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);

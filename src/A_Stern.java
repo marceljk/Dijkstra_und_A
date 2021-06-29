@@ -39,6 +39,18 @@ public class A_Stern implements Runnable {
         end = gui.getFinalNode();
         do {
 
+            if (openlist.size() <= 0) {               //Wenn Kein Startpunkt vorhanden, dann Suche beenden
+                search = false;
+                System.out.println("Kein Weg gefunden!");
+                break;
+            }
+
+            try {
+                Thread.sleep(10);               //Thread wartet auf vorherige Operationen, um Fehler zu vermeiden
+            } catch (Exception e) {
+
+            }
+
             double min = Double.MAX_VALUE;
             for (Node key : openlist.keySet()) {     //Suche Knoten mit niedrigsten Kosten
                 if (min > openlist.get(key)) {
@@ -47,25 +59,15 @@ public class A_Stern implements Runnable {
                 }
             }
 
-            if (openlist.size() <= 0) {               //Wenn Kein Startpunkt vorhanden, dann Suche beenden
-                search = false;
-                System.out.println("Kein Weg gefunden!");
-                break;
-            }
-
-            try {
-                Thread.sleep(100);               //Thread wartet auf vorherige Operationen, um Fehler zu vermeiden
-            } catch (Exception e) {
-
-            }
-
             openlist.remove(currentNode);
+
             if (currentNode == end) {                 //Prüft ob currentNode der Zielknoten ist
                 System.out.println("Weg gefunden!");
                 showPath();
                 search = false;
                 break;
             }
+
             closedList.add(currentNode);            //Damit der Knoten nicht wiederholt geprüft wird
 
             expandNode(currentNode);
@@ -123,6 +125,8 @@ public class A_Stern implements Runnable {
 
 
             if (openlist.containsValue(successor)) {
+                openlist.remove(successor);
+                /*
                 try {
                     for (Node key : openlist.keySet()) {
                         if (key.getX() == successor.getX() && key.getY() == successor.getY()) {
@@ -133,6 +137,8 @@ public class A_Stern implements Runnable {
                 } catch (Exception e) {
                     System.err.println(e);
                 }
+
+                 */
 
             }
             successor.setHops(currentNode.getHops() + 1);     // Zählt jedesmal um eins hoch.
