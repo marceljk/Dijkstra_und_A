@@ -39,7 +39,7 @@ public class Dijkstra implements Runnable{
         initialisiere();
 
         try {                                       // "Damit nicht prüftbare Knoten nicht das Programm abstürzen lässt"
-            while (!q.isEmpty()) {                  // Solange Suche nicht beendet und kürzester Pfad nicht gefunden, wiederhole Suche
+            while (!q.isEmpty()) {                  // Solange Liste mit möglichen Knoten nicht leer ist, suche weiter
                 Node u = getMinDistNode();          // Knoten mit niedrigsten Kosten    // Betrachtungsknoten
                 q.remove(u);                        // Knoten mit niedrigsten Kosten wird von Liste entfernt.
 
@@ -78,7 +78,6 @@ public class Dijkstra implements Runnable{
     }
 
     /**
-     * Abstände und Vorgänger vom Graphen und vom Startknoten werden initialisiert.
      * Liste mit alle möglichen Knoten wird intitialisiert.
      */
     private void initialisiere() {
@@ -115,9 +114,6 @@ public class Dijkstra implements Runnable{
         }
     }
 
-    /**
-     * Durch Iteration der Vorgänger wird der kürzeste Pfad herausgefunden.
-     */
     private void erstelleKuerzestenPfad() {
         ArrayList<Node> path = new ArrayList<>();
         Node finalNode = gui.getFinalNode();
