@@ -38,9 +38,8 @@ public class Dijkstra implements Runnable{
         gui.clearSearched();
         initialisiere();
 
-        boolean search = true;          // Wird im Code garnicht geändert?
-        try {
-            while (!q.isEmpty() && search) {        // Solange Suche nicht beendet und kürzester Pfad nicht gefunden, wiederhole Suche
+        try {                                       // "Damit nicht prüftbare Knoten nicht das Programm abstürzen lässt"
+            while (!q.isEmpty()) {                  // Solange Suche nicht beendet und kürzester Pfad nicht gefunden, wiederhole Suche
                 Node u = getMinDistNode();          // Knoten mit niedrigsten Kosten    // Betrachtungsknoten
                 q.remove(u);                        // Knoten mit niedrigsten Kosten wird von Liste entfernt.
 
@@ -53,20 +52,20 @@ public class Dijkstra implements Runnable{
                 for (Node successor : u.getSuccessor()) {     // Bekommt die Nachbarknoten von dem letzten betrachteten Knoten, welcher entfernt wurde.     // Nachbarknoten
 
                     if (!(successor.getType() == 3 || successor.getType() == 2 || successor.getType() == 1)) {   //Prüft ob der Knoten nicht ein Start-, Zielfeld oder eine Wand ist.
-                        successor.setSearched(true);        // ???
+                        successor.setSearched(true);        // Kasten auf Blau setzen
                     }
 
                     gepruefte = 0;
                     for (int x = 0; x < gui.getBoard().length; x++) {
                         for (int y = 0; y < gui.getBoard()[x].length; y++) {
-                            if (gui.getBoard()[x][y].isSearched()) {
+                            if (gui.getBoard()[x][y].isSearched()) {            // Alle geprüften (Blauen) werden aufgezählt.
                                 gepruefte++;
                             }
                         }
                     }
                     PanelHopsControl.setDijkstraGeprueft(gepruefte);        // Zeigt an, wie viele Knoten bereits geprüft sind.
 
-                    if (q.contains(successor)) {            // ???
+                    if (q.contains(successor)) {            // Wenn Nachbarknoten noch nicht uberprüft wurde (noch in Liste ist).
                         distanz_update(u, successor);       // Knoten mit niedrigsten Kosten + Nachbarknoten
                     }
                 }
@@ -80,9 +79,11 @@ public class Dijkstra implements Runnable{
 
     /**
      * Abstände und Vorgänger vom Graphen und vom Startknoten werden initialisiert.
+     * Liste mit alle möglichen Knoten wird intitialisiert.
+     * Hashmap mit Vorgängern und Abstand.
      */
     private void initialisiere() {
-        q = new ArrayList<>();
+        q = new ArrayList<>();              // Liste mit allen Knoten
         abstand = new HashMap<>();
         vorgänger = new HashMap<>();
         for(int x = 0; x < gui.getBoard().length; x++) {
@@ -90,7 +91,7 @@ public class Dijkstra implements Runnable{
                 Node v = gui.getBoard()[x][y];
                 abstand.put(v,Double.MAX_VALUE);
                 vorgänger.put(v, null);
-                if(v.getType() != 1) {
+                if(v.getType() != 1) {      // Alle Kasten (außer Wand) werden der Liste hinzugefügt.
                     q.add(v);
                 }
             }
@@ -108,10 +109,10 @@ public class Dijkstra implements Runnable{
         successor.setCostFromStart(costPath);
 
         if(costPath < abstand.get(successor)) {
-            abstand.remove(successor);                  //
-            abstand.put(successor, costPath);           //
-            vorgänger.remove(successor);                //
-            vorgänger.put(successor, currentNode);      //
+            abstand.remove(successor);
+            abstand.put(successor, costPath);
+            vorgänger.remove(successor);
+            vorgänger.put(successor, currentNode);
         }
     }
 
