@@ -41,7 +41,7 @@ public class Dijkstra implements Runnable{
         boolean search = true;          // Wird im Code garnicht geändert?
         try {
             while (!q.isEmpty() && search) {        // Solange Suche nicht beendet und kürzester Pfad nicht gefunden, wiederhole Suche
-                Node u = getMinDistNode();          // Knoten mit niedrigsten Kosten
+                Node u = getMinDistNode();          // Knoten mit niedrigsten Kosten    // Betrachtungsknoten
                 q.remove(u);                        // Knoten mit niedrigsten Kosten wird von Liste entfernt.
 
                 try {
@@ -50,7 +50,7 @@ public class Dijkstra implements Runnable{
                     e.printStackTrace();
                 }
 
-                for (Node successor : u.getSuccessor()) {     // Bekommt die Nachbarknoten von dem letzten betrachteten Knoten, welcher entfernt wurde.
+                for (Node successor : u.getSuccessor()) {     // Bekommt die Nachbarknoten von dem letzten betrachteten Knoten, welcher entfernt wurde.     // Nachbarknoten
 
                     if (!(successor.getType() == 3 || successor.getType() == 2 || successor.getType() == 1)) {   //Prüft ob der Knoten nicht ein Start-, Zielfeld oder eine Wand ist.
                         successor.setSearched(true);        // ???
@@ -66,7 +66,7 @@ public class Dijkstra implements Runnable{
                     }
                     PanelHopsControl.setDijkstraGeprueft(gepruefte);        // Zeigt an, wie viele Knoten bereits geprüft sind.
 
-                    if (q.contains(successor)) {
+                    if (q.contains(successor)) {            // ???
                         distanz_update(u, successor);       // Knoten mit niedrigsten Kosten + Nachbarknoten
                     }
                 }
@@ -99,7 +99,7 @@ public class Dijkstra implements Runnable{
     }
 
     /**
-     *
+     * Update der Abstände, falls ein kürzerer Weg gefunden wurde.
      * @param currentNode -> aktuell günstigster Knoten
      * @param successor -> Nachbarknoten
      */
@@ -108,10 +108,10 @@ public class Dijkstra implements Runnable{
         successor.setCostFromStart(costPath);
 
         if(costPath < abstand.get(successor)) {
-            abstand.remove(successor);
-            abstand.put(successor, costPath);
-            vorgänger.remove(successor);
-            vorgänger.put(successor, currentNode);
+            abstand.remove(successor);                  //
+            abstand.put(successor, costPath);           //
+            vorgänger.remove(successor);                //
+            vorgänger.put(successor, currentNode);      //
         }
     }
 
