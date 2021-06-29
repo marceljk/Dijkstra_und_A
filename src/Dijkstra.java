@@ -52,7 +52,7 @@ public class Dijkstra implements Runnable{
                 for (Node successor : u.getSuccessor()) {     // Bekommt die Nachbarknoten von dem letzten betrachteten Knoten, welcher entfernt wurde.     // Nachbarknoten
 
                     if (!(successor.getType() == 3 || successor.getType() == 2 || successor.getType() == 1)) {   //Prüft ob der Knoten nicht ein Start-, Zielfeld oder eine Wand ist.
-                        successor.setSearched(true);        // Kasten auf Blau setzen
+                        successor.setSearched(true);        // Kasten auf Blau setzen (geprüfte)
                     }
 
                     gepruefte = 0;
@@ -80,7 +80,6 @@ public class Dijkstra implements Runnable{
     /**
      * Abstände und Vorgänger vom Graphen und vom Startknoten werden initialisiert.
      * Liste mit alle möglichen Knoten wird intitialisiert.
-     * Hashmap mit Vorgängern und Abstand.
      */
     private void initialisiere() {
         q = new ArrayList<>();              // Liste mit allen Knoten
