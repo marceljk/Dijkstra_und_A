@@ -48,8 +48,8 @@ public class A_Stern implements Runnable {
 
             try {
                 Thread.sleep(10);                //Thread wartet auf vorherige Operationen, um Fehler zu vermeiden
-            } catch (Exception e) {                    // & bessere Darstellung wie der A* untersucht
-
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
 
             double min = Double.MAX_VALUE;
@@ -121,16 +121,16 @@ public class A_Stern implements Runnable {
 
 
             if (!(successor.getType() == 3 || successor.getType() == 2 || successor.getType() == 1 || successor.getType() == 6)) {   //Prüft ob der Knoten nicht ein Start-, Zielfeld, eine Wand oder Wasser ist.
-                successor.setSearched(true);                    //Knoten wird auf untersucht gesetzt, wird in der GUI angezeigt
+                successor.setSearched(true);                                            //Knoten wird auf untersucht gesetzt, wird in der GUI angezeigt
             }
 
 
-            if (openlist.containsKey(successor)) {              //Falls Knoten in OpenList vorhanden ist, solls entfernt werden
+            if (openlist.containsKey(successor)) {                                      //Falls Knoten in OpenList vorhanden ist, solls entfernt werden
                 openlist.remove(successor);
 
             }
-            successor.setHops(currentNode.getHops() + 1);     // Zählt jedesmal um eins hoch.
-            openlist.put(successor, (cost + successor.getManhattenDist()));         //Fügt Nachbar Knoten mit neuen Kosten in die OpenList
+            successor.setHops(currentNode.getHops() + 1);                               // Zählt jedesmal um eins hoch.
+            openlist.put(successor, (cost + successor.getManhattenDist()));             //Fügt Nachbar Knoten mit neuen Kosten in die OpenList
         }
     }
 
@@ -143,10 +143,10 @@ public class A_Stern implements Runnable {
         System.out.println(finalNode.getHops() + 1);
         PanelHopsControl.setaSternhoptext(finalNode.getCostFromStart());
 
-        while (!finalNode.equals(startNode)) {                  //Solange finalNode nicht Startknoten ist
+        while (!finalNode.equals(startNode)) {                                              //Solange finalNode nicht Startknoten ist
             finalNode = gui.getBoard()[finalNode.getLastX()][finalNode.getLastY()];         //FinalNode wird auf vorherigen Knoten gesetzt
             if (!finalNode.equals(startNode)) {
-                finalNode.setPath(true);                        //Knoten wird teil des endgültigen Weg und gelb gefärbt
+                finalNode.setPath(true);                                                    //Knoten wird teil des endgültigen Weg und gelb gefärbt
             }
         }
     }
