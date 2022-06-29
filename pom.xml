@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>groupId</groupId>
-    <artifactId>Dijkstra und A</artifactId>
+    <artifactId>Dijkstra_und_A</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
